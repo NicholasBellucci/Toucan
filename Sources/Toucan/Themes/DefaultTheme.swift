@@ -18,7 +18,7 @@ public struct DefaultTheme: EditorTheme {
     }
 
     public var foregroundColor: NSColor {
-        .white
+        .black
     }
 
     public var gutterStyle: GutterStyle {
