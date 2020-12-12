@@ -8,7 +8,8 @@ public protocol EditorTheme: Theme {
 extension EditorTheme {
     public var globalAttributes: [NSAttributedString.Key: Any] {
         [
-            .font: font
+            .font: font,
+            .foregroundColor: foregroundColor
         ]
     }
 

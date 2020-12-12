@@ -17,6 +17,10 @@ public struct DefaultTheme: EditorTheme {
         .monospacedSystemFont(ofSize: 13, weight: .medium)
     }
 
+    public var foregroundColor: NSColor {
+        .white
+    }
+
     public var gutterStyle: GutterStyle {
         GutterStyle(backgroundColor: backgroundColor, minimumWidth: 32)
     }

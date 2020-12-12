@@ -26,6 +26,7 @@ public protocol Theme {
     var backgroundColor: NSColor { get }
     var cursorColor: NSColor { get }
     var font: NSFont { get }
+    var foregroundColor: NSColor { get }
     var globalAttributes: [NSAttributedString.Key: Any] { get }
     var gutterStyle: GutterStyle { get }
     var lineNumbersStyle: LineNumbersStyle { get }
