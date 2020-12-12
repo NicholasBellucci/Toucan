@@ -39,7 +39,7 @@ public class SyntaxView: NSView {
         set {
             textView.layer?.isOpaque = true
             textView.string = newValue
-            
+
             textDidChange()
         }
     }
@@ -98,9 +98,9 @@ public class SyntaxView: NSView {
         textStorage.addLayoutManager(layoutManager)
 
         let textView = EditorTextView(frame: .zero, textContainer: textContainer)
-        textView.gutterWidth = 20
         textView.delegate = self
         textView.text = ""
+        textView.gutterWidth = 20
         textView.minSize = NSSize(width: 0.0, height: self.bounds.height)
         textView.maxSize = NSSize(width: CGFloat.greatestFiniteMagnitude, height: CGFloat.greatestFiniteMagnitude)
         textView.isVerticallyResizable = true

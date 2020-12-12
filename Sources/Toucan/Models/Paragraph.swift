@@ -76,28 +76,58 @@ extension Paragraph {
     }
 
     static func offsetParagraphs(_ paragraphs: [Paragraph], for textView: EditorTextView, yOffset: CGFloat = 0) -> [Paragraph] {
-        paragraphs.map {
+        var paragraphs = paragraphs
+
+        if let yOffset = textView.enclosingScrollView?.contentView.bounds.origin.y {
+            paragraphs = paragraphs.map {
+                var paragraph = $0
+                paragraph.rect.origin.y += yOffset
+                return paragraph
+            }
+        }
+
+        paragraphs = paragraphs.map {
             var paragraph = $0
             paragraph.rect.origin.y += yOffset
             return paragraph
         }
+
+        return paragraphs
     }
 
     static func drawLineNumbers(for paragraphs: [Paragraph], in rect: CGRect, for textView: EditorTextView) {
-        guard let style = textView.theme?.lineNumbersStyle else { return }
+        guard let style = textView.theme?.lineNumbersStyle else {
+            return
+        }
 
-        paragraphs.forEach {
-            if $0.rect.intersects(rect) {
-                let attributes = $0.attributedString(for: style)
-                var drawRect = $0.rect
-                let drawSize = attributes.size()
-                let gutterWidth = textView.gutterWidth
+        for paragraph in paragraphs {
 
-                drawRect.origin.x = gutterWidth - drawSize.width - 4
-                drawRect.size.width = drawSize.width
-                drawRect.size.height = drawSize.height
-                attributes.draw(in: drawRect)
+            guard paragraph.rect.intersects(rect) else {
+                continue
             }
+
+            let attr = paragraph.attributedString(for: style)
+
+            var drawRect = paragraph.rect
+
+            let gutterWidth = textView.gutterWidth
+
+            let drawSize = attr.size()
+
+            drawRect.origin.x = gutterWidth - drawSize.width - 4
+
+            #if os(macOS)
+    //            drawRect.origin.y += (drawRect.height - drawSize.height) / 2.0
+            #else
+                //            drawRect.origin.y += 22 - drawSize.height
+            #endif
+            drawRect.size.width = drawSize.width
+            drawRect.size.height = drawSize.height
+
+    //        Color.red.withAlphaComponent(0.4).setFill()
+    //        paragraph.rect.fill()
+
+            attr.draw(in: drawRect)
         }
     }
 }

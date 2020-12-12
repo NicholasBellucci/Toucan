@@ -87,22 +87,25 @@ extension SyntaxView: NSTextViewDelegate {
         guard let replacementString = replacementString,
               let textStorage = textView.textStorage else { return true }
 
+        let selectedRange = textView.selectedRange
         var newInsertingText = replacementString
 
         if newInsertingText == "\n" {
             let text = textView.text as NSString
-            var currentLine = text.substring(with: text.lineRange(for: textView.selectedRange))
+            var currentLine = text.substring(with: text.lineRange(for: selectedRange))
             var newLinePrefix = ""
 
             if currentLine.hasSuffix("\n") {
                 currentLine.removeLast()
             }
 
-            currentLine.forEach {
-                let charSet = CharacterSet(charactersIn: "\($0)")
+            for character in currentLine {
+                let tempSet = CharacterSet(charactersIn: "\(character)")
 
-                if charSet.isSubset(of: .whitespacesAndNewlines) {
-                    newLinePrefix += "\($0)"
+                if tempSet.isSubset(of: .whitespacesAndNewlines) {
+                    newLinePrefix += "\(character)"
+                } else {
+                    break
                 }
             }
 
@@ -113,7 +116,7 @@ extension SyntaxView: NSTextViewDelegate {
 
         for cachedToken in cachedTokens {
             if cachedToken.token.isPlaceholder {
-                if newInsertingText == "", textView.selectedRange.lowerBound == cachedToken.range.upperBound {
+                if newInsertingText == "", selectedRange.lowerBound == cachedToken.range.upperBound {
                     textStorage.replaceCharacters(in: cachedToken.range, with: newInsertingText)
                     textDidChange()
                     updateSelectedRange(NSRange(location: cachedToken.range.lowerBound, length: 0))
@@ -121,7 +124,7 @@ extension SyntaxView: NSTextViewDelegate {
                     return false
                 }
 
-                if isPlaceholderSelected(selectedRange: textView.selectedRange, tokenRange: cachedToken.range) {
+                if isPlaceholderSelected(selectedRange: selectedRange, tokenRange: cachedToken.range) {
                     if newInsertingText == "\t" {
                         let placeholderTokens = cachedTokens.filter {
                             $0.token.isPlaceholder
@@ -139,7 +142,7 @@ extension SyntaxView: NSTextViewDelegate {
                         return false
                     }
 
-                    if textView.selectedRange.location <= cachedToken.range.location || textView.selectedRange.upperBound >= cachedToken.range.upperBound {
+                    if selectedRange.location <= cachedToken.range.location || selectedRange.upperBound >= cachedToken.range.upperBound {
                         return true
                     }
 
@@ -153,9 +156,9 @@ extension SyntaxView: NSTextViewDelegate {
         }
 
         if replacementString == "\n" {
-            textStorage.replaceCharacters(in: textView.selectedRange, with: newInsertingText)
-            textView.selectedRange()
-            updateSelectedRange(NSRange(location: textView.selectedRange.lowerBound + newInsertingText.count, length: 0))
+            textStorage.replaceCharacters(in: selectedRange, with: newInsertingText)
+            textDidChange()
+            updateSelectedRange(NSRange(location: selectedRange.lowerBound + newInsertingText.count, length: 0))
             return false
         }
 
@@ -163,7 +166,9 @@ extension SyntaxView: NSTextViewDelegate {
     }
 
     public func textDidChange(_ notification: Notification) {
-        guard let textView = notification.object as? EditorTextView, textView == self.textView else { return }
+        guard let textView = notification.object as? EditorTextView, textView == self.textView else {
+            return
+        }
 
         textDidChange()
         delegate?.textViewTextDidChange(textView)

@@ -17,7 +17,6 @@ class TextViewWrapperView: NSView {
         super.resize(withOldSuperviewSize: oldSize)
         textView?.invalidateCachedParagraphs()
         setNeedsDisplay(bounds)
-
     }
 
     override public func draw(_ rect: CGRect) {
