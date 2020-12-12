@@ -8,15 +8,14 @@ public protocol EditorTheme: Theme {
 extension EditorTheme {
     public var globalAttributes: [NSAttributedString.Key: Any] {
         [
-            .font: font,
-            .foregroundColor: color(for: .plain)
+            .font: font
         ]
     }
 
     public func attributes(for token: Token) -> [NSAttributedString.Key: Any] {
         var attributes: [NSAttributedString.Key: Any] = [:]
 
-        if let token = token as? SimpleSourceCodeToken {
+        if let token = token as? SourceCodeToken {
             attributes[.foregroundColor] = color(for: token.type)
         }
 

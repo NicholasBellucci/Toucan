@@ -1,6 +1,20 @@
 import Foundation
 
 public class SwiftLexer {
+    public enum SwiftTokenType: TokenType {
+        case comment, customType, identifier, instanceVariable
+        case keyword, number, other, placeholder, plain
+        case string, type
+
+        public var isPlaceholder: Bool {
+            self == .placeholder
+        }
+
+        public var isPlain: Bool {
+            self == .plain
+        }
+    }
+
     public init() { }
 
     private lazy var generators: [Generator] = {
@@ -8,21 +22,21 @@ public class SwiftLexer {
         editorPlaceholderPattern += "(#>)"
 
         return [
-            regexGenerator("\\b(NS|UI)[A-Z][a-zA-Z]+\\b", tokenType: .identifier),
-            regexGenerator("(?<=\\b(struct|class|enum|typealias|)\\s)(\\w+)", tokenType: .type),
-            regexGenerator("(?<=\\b:\\s)(\\w+)|(?<=\\[)(.*?)(?=\\])", tokenType: .customType),
-            regexGenerator("\\b(println|print)(?=\\()", tokenType: .identifier),
-            regexGenerator("(?<=(\\s|\\[|,|:))(\\d|\\.|_)+", tokenType: .number),
-            regexGenerator("(?<=\\.)[A-Za-z_]+\\w*", tokenType: .instanceVariable),
-            regexGenerator("\\bself(?=\\.)", tokenType: .keyword),
-            keywordGenerator(keywords, tokenType: .keyword),
-            keywordGenerator(swiftIdentifiers, tokenType: .identifier),
-            regexGenerator("//(.*)", tokenType: .comment),
-            regexGenerator("(/\\*)(.*)(\\*/)", options: [.dotMatchesLineSeparators], tokenType: .comment),
-            regexGenerator("(\"|@\")[^\"\\n]*(@\"|\")", tokenType: .string),
-            regexGenerator("(\"\"\")(.*?)(\"\"\")", options: [.dotMatchesLineSeparators], tokenType: .string),
-            regexGenerator("(?<=\\b(?:var|let|case)\\s)(\\w+)", tokenType: .other),
-            regexGenerator(editorPlaceholderPattern, tokenType: .placeholder)
+            regexGenerator("\\b(NS|UI)[A-Z][a-zA-Z]+\\b", tokenType: SwiftTokenType.identifier),
+            regexGenerator("(?<=\\b(struct|class|enum|typealias|)\\s)(\\w+)", tokenType: SwiftTokenType.identifier),
+            regexGenerator("(?<=\\b:\\s)(\\w+)|(?<=\\[)(.*?)(?=\\])", tokenType: SwiftTokenType.customType),
+            regexGenerator("\\b(println|print)(?=\\()", tokenType: SwiftTokenType.identifier),
+            regexGenerator("(?<=(\\s|\\[|,|:))(\\d|\\.|_)+", tokenType: SwiftTokenType.number),
+            regexGenerator("(?<=\\.)[A-Za-z_]+\\w*", tokenType: SwiftTokenType.instanceVariable),
+            regexGenerator("\\bself(?=\\.)", tokenType: SwiftTokenType.keyword),
+            keywordGenerator(keywords, tokenType: SwiftTokenType.keyword),
+            keywordGenerator(swiftIdentifiers, tokenType: SwiftTokenType.identifier),
+            regexGenerator("//(.*)", tokenType: SwiftTokenType.comment),
+            regexGenerator("(/\\*)(.*)(\\*/)", options: [.dotMatchesLineSeparators], tokenType: SwiftTokenType.comment),
+            regexGenerator("(\"|@\")[^\"\\n]*(@\"|\")", tokenType: SwiftTokenType.string),
+            regexGenerator("(\"\"\")(.*?)(\"\"\")", options: [.dotMatchesLineSeparators], tokenType: SwiftTokenType.string),
+            regexGenerator("(?<=\\b(?:var|let|case)\\s)(\\w+)", tokenType: SwiftTokenType.other),
+            regexGenerator(editorPlaceholderPattern, tokenType: SwiftTokenType.placeholder)
         ]
         .compactMap({ $0 })
     }()

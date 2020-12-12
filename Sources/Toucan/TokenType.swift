@@ -1,34 +1,21 @@
 import Foundation
 
-public enum TokenType {
-    case comment
-    case customType
-    case identifier
-    case instanceVariable
-    case keyword
-    case number
-    case other
-    case placeholder
-    case plain
-    case string
-    case type
+public protocol TokenType {
+    var isPlaceholder: Bool { get }
+    var isPlain: Bool { get }
 }
 
-protocol SourceCodeToken: Token {
-    var type: TokenType { get }
+struct SourceCodeToken: Token {
+    var type: TokenType
+    let range: Range<String.Index>
 }
 
 extension SourceCodeToken {
     var isPlaceholder: Bool {
-        return type == .placeholder
+        return type.isPlaceholder
     }
 
     var isPlain: Bool {
-        return type == .plain
+        return type.isPlain
     }
-}
-
-struct SimpleSourceCodeToken: SourceCodeToken {
-    let type: TokenType
-    let range: Range<String.Index>
 }

@@ -26,6 +26,8 @@ public struct DefaultTheme: EditorTheme {
     }
 
     public func color(for type: TokenType) -> NSColor {
+        guard let type = type as? SwiftLexer.SwiftTokenType else { return .clear }
+        
         switch type {
         case .comment:
             return NSColor(0x5D6C79)
