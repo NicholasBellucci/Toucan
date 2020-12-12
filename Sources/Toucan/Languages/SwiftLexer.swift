@@ -36,6 +36,7 @@ public class SwiftLexer {
             regexGenerator("(\"|@\")[^\"\\n]*(@\"|\")", tokenType: SwiftTokenType.string),
             regexGenerator("(\"\"\")(.*?)(\"\"\")", options: [.dotMatchesLineSeparators], tokenType: SwiftTokenType.string),
             regexGenerator("(?<=\\b(?:var|let|case)\\s)(\\w+)", tokenType: SwiftTokenType.other),
+            regexGenerator("(?<=\\bimport\\s)(\\w+)", tokenType: SwiftTokenType.plain),
             regexGenerator(editorPlaceholderPattern, tokenType: SwiftTokenType.placeholder)
         ]
         .compactMap({ $0 })
