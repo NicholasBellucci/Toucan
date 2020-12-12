@@ -17,7 +17,7 @@ public struct DefaultTheme: CodeTheme {
     }
 
     public var lineNumbersStyle: LineNumbersStyle {
-        LineNumbersStyle(font: .systemFont(ofSize: 16), textColor: lineNumbersColor)
+        LineNumbersStyle(font: .systemFont(ofSize: 15), textColor: lineNumbersColor)
     }
 
     private var lineNumbersColor: NSColor {
