@@ -2,9 +2,19 @@ import Foundation
 
 public class SwiftLexer {
     public enum SwiftTokenType: TokenType {
-        case comment, customType, identifier, instanceVariable
-        case keyword, number, other, placeholder, plain
-        case string, type
+        case comment
+        case string
+        case number
+        case keyword
+        case typeDeclaration
+        case otherDeclaration
+        case projectType
+        case projectVariable
+        case otherType
+        case otherFunction
+        case otherVariables
+        case placeholder
+        case plain
 
         public var isPlaceholder: Bool {
             self == .placeholder
@@ -18,26 +28,27 @@ public class SwiftLexer {
     public init() { }
 
     private lazy var generators: [Generator] = {
-        var editorPlaceholderPattern = "(<#)[^\"\\n]*"
-        editorPlaceholderPattern += "(#>)"
+
 
         return [
-            regexGenerator("\\b(NS|UI)[A-Z][a-zA-Z]+\\b", tokenType: SwiftTokenType.identifier),
-            regexGenerator("(?<=\\b(struct|class|enum|typealias|)\\s)(\\w+)", tokenType: SwiftTokenType.identifier),
-            regexGenerator("(?<=\\b:\\s)(\\w+)|(?<=\\[)(.*?)(?=\\])", tokenType: SwiftTokenType.customType),
-            regexGenerator("\\b(println|print)(?=\\()", tokenType: SwiftTokenType.identifier),
-            regexGenerator("(?<=(\\s|\\[|,|:))(\\d|\\.|_)+", tokenType: SwiftTokenType.number),
-            regexGenerator("(?<=\\.)[A-Za-z_]+\\w*", tokenType: SwiftTokenType.instanceVariable),
-            regexGenerator("\\bself(?=\\.)", tokenType: SwiftTokenType.keyword),
-            keywordGenerator(keywords, tokenType: SwiftTokenType.keyword),
-            keywordGenerator(swiftIdentifiers, tokenType: SwiftTokenType.identifier),
-            regexGenerator("//(.*)", tokenType: SwiftTokenType.comment),
-            regexGenerator("(/\\*)(.*)(\\*/)", options: [.dotMatchesLineSeparators], tokenType: SwiftTokenType.comment),
-            regexGenerator("(\"|@\")[^\"\\n]*(@\"|\")", tokenType: SwiftTokenType.string),
-            regexGenerator("(\"\"\")(.*?)(\"\"\")", options: [.dotMatchesLineSeparators], tokenType: SwiftTokenType.string),
-            regexGenerator("(?<=\\b(?:var|let|case)\\s)(\\w+)", tokenType: SwiftTokenType.other),
-            regexGenerator("(?<=\\bimport\\s)(\\w+)", tokenType: SwiftTokenType.plain),
-            regexGenerator(editorPlaceholderPattern, tokenType: SwiftTokenType.placeholder)
+            projectTypeRegexGenerator,
+            commentsRegexGenerator,
+            dotCommentsRegexGenerator,
+            multidotCommentsRegexGenerator,
+            stringsRegexGenerator,
+            stringsWithAtRegexGenerator,
+            numbersRegexGenerator,
+            typeDeclarationRegexGenerator,
+            otherDeclarationRegexGenerator,
+            projectTypeRegexGenerator,
+            projectVariablesRegexGenerator,
+            swiftLibraryTypesGenerator,
+            swiftIdentifiersGenerator,
+            swiftFunctionsGenerator,
+            swiftVariablesGenerator,
+            keywordsGenerator,
+            printGenerator,
+            placeholderGenerator
         ]
         .compactMap({ $0 })
     }()
@@ -51,10 +62,137 @@ extension SwiftLexer: RegexLexer {
 
 extension SwiftLexer {
     private var keywords: [String] {
-        "as associatedtype break case catch class continue convenience default defer deinit else enum extension fallthrough false fileprivate final for func get guard if import in init inout internal is lazy let mutating nil nonmutating open operator override private protocol public repeat required rethrows return required self set static struct subscript super switch throw throws true try typealias unowned var weak where while".components(separatedBy: " ")
+        "@objc as associatedtype break case catch class continue convenience default defer deinit else enum extension fallthrough false fileprivate final for func get guard if import in init inout internal is lazy let mutating nil nonmutating open operator override private protocol public repeat required rethrows return required self set static struct subscript super switch throw throws true try typealias unowned var weak where while precedencegroup".components(separatedBy: " ")
     }
 
     private var swiftIdentifiers: [String] {
         "Any Array AutoreleasingUnsafePointer BidirectionalReverseView Bit Bool CaseIterable CFunctionPointer COpaquePointer CVaListPointer Character Codable CodingKey CollectionOfOne ConstUnsafePointer ContiguousArray Data Dictionary DictionaryGenerator DictionaryIndex Double EmptyCollection EmptyGenerator EnumerateGenerator FilterCollectionView FilterCollectionViewIndex FilterGenerator FilterSequenceView Float Float80 FloatingPointClassification GeneratorOf GeneratorOfOne GeneratorSequence HeapBuffer HeapBuffer HeapBufferStorage HeapBufferStorageBase ImplicitlyUnwrappedOptional IndexingGenerator Int Int16 Int32 Int64 Int8 IntEncoder LazyBidirectionalCollection LazyForwardCollection LazyRandomAccessCollection LazySequence Less MapCollectionView MapSequenceGenerator MapSequenceView MirrorDisposition ObjectIdentifier OnHeap Optional PermutationGenerator QuickLookObject RandomAccessReverseView Range RangeGenerator RawByte Repeat ReverseBidirectionalIndex Printable ReverseRandomAccessIndex SequenceOf SinkOf Slice StaticString StrideThrough StrideThroughGenerator StrideTo StrideToGenerator String Index UTF8View Index UnicodeScalarView IndexType GeneratorType UTF16View UInt UInt16 UInt32 UInt64 UInt8 UTF16 UTF32 UTF8 UnicodeDecodingResult UnicodeScalar Unmanaged UnsafeArray UnsafeArrayGenerator UnsafeMutableArray UnsafePointer URL VaListBuilder Header Zip2 ZipGenerator2".components(separatedBy: " ")
+    }
+}
+
+private extension SwiftLexer {
+    /// `Comments`
+    ///
+    /// Regex and generator for comments with forward slash.
+    var commentsRegexGenerator: Generator? {
+        regexGenerator("(/\\*)(.*)(\\*/)", tokenType: SwiftTokenType.comment)
+    }
+
+    /// `Comments`
+    ///
+    /// Regex and generator for comments with dot.
+    var dotCommentsRegexGenerator: Generator? {
+        regexGenerator("//(.*)", tokenType: SwiftTokenType.comment)
+    }
+
+    /// `Comments`
+    ///
+    /// Regex and generator for comments between dots.
+    var multidotCommentsRegexGenerator: Generator? {
+        regexGenerator("(/\\*)(.*)(\\*/)", options: [.dotMatchesLineSeparators], tokenType: SwiftTokenType.comment)
+    }
+
+    /// `Strings`
+    ///
+    /// Regex and generator for strings.
+    var stringsRegexGenerator: Generator? {
+        regexGenerator("(\"\"\")(.*?)(\"\"\")", options: [.dotMatchesLineSeparators], tokenType: SwiftTokenType.string)
+    }
+
+    /// `Strings`
+    ///
+    /// Regex and generator for strings with @.
+    var stringsWithAtRegexGenerator: Generator? {
+        regexGenerator("(\"|@\")[^\"\\n]*(@\"|\")", tokenType: SwiftTokenType.string)
+    }
+
+    /// `Numbers`
+    ///
+    /// Regex and generator for numbers.
+    var numbersRegexGenerator: Generator? {
+        regexGenerator("(?<=(\\s|\\[|,|:))(\\d|\\.|_)+", tokenType: SwiftTokenType.number)
+    }
+
+    /// `Keywords`
+    ///
+    /// Regex and generator for keywords.
+    /// These keywords are stored in the keywords array.
+    var keywordsGenerator: Generator? {
+        keywordGenerator(keywords, tokenType: SwiftTokenType.keyword)
+    }
+
+    /// `Type Declarations`
+    ///
+    /// Regex and generator for type declarations.
+    /// These are type names that come after:
+    ///     `class, struct, enum, protocol, or typealias`
+    var typeDeclarationRegexGenerator: Generator? {
+        regexGenerator("(?<=\\b(class|struct|enum|protocol|typealias)\\s)(\\w+)", tokenType: SwiftTokenType.typeDeclaration)
+    }
+
+    /// `Other Declarations`
+    ///
+    /// Regex and generator for other type declarations.
+    /// These are type names that come after:
+    ///     `func, operator, or precedencegroup`
+    var otherDeclarationRegexGenerator: Generator? {
+        regexGenerator("(?<=\\b(func|operator|precedencegroup|var|let|case)\\s)(\\w+)", tokenType: SwiftTokenType.otherDeclaration)
+    }
+
+    /// `Project Type Names`
+    ///
+    /// Regex and generator for project type names.
+    /// These are determined to occur after colons either in [] or freeform
+    /// uness the variable prefix is that of a swift library.
+    var projectTypeRegexGenerator: Generator? {
+        regexGenerator("(?<=\\b:\\s)(\\w+)|(?<=\\[)(.*?)(?=\\])", tokenType: SwiftTokenType.projectType)
+    }
+
+    /// `Project Instance Variable`
+    ///
+    /// Regex and generator for project instance variables.
+    /// All variables that follow a `.` are assumed to be project.
+    var projectVariablesRegexGenerator: Generator? {
+        regexGenerator("\\bself(?=\\.)", tokenType: SwiftTokenType.keyword)
+    }
+
+    /// `Other Type Names`
+    ///
+    /// Regex and generator for swift library types.
+    /// These are assumed to have common prefix letters.
+    var swiftLibraryTypesGenerator: Generator? {
+        regexGenerator("\\b(NS|UI|CG|AV)[A-Z][a-zA-Z]+\\b", tokenType: SwiftTokenType.otherType)
+    }
+
+    /// `Other Type Names`
+    ///
+    /// Regex and generator for other swift identifiers.
+    /// These are pulled from the swift identifiers array.
+    var swiftIdentifiersGenerator: Generator? {
+        keywordGenerator(swiftIdentifiers, tokenType: SwiftTokenType.otherType)
+    }
+
+    var swiftFunctionsGenerator: Generator? {
+        regexGenerator("(?<=\\s)([a-zA-Z]*?)(?=\\()", tokenType: SwiftTokenType.otherFunction)
+    }
+
+    var swiftVariablesGenerator: Generator? {
+        regexGenerator("(?<=\\.)[A-Za-z_]+\\w*", tokenType: SwiftTokenType.otherVariables)
+    }
+
+    /// `Print`
+    ///
+    /// Regex and generator for prints.
+    var printGenerator: Generator? {
+        regexGenerator("\\b(println|print)(?=\\()", tokenType: SwiftTokenType.otherType)
+    }
+
+    /// `Placeholder`
+    ///
+    /// Regex and generator for placeholders.
+    var placeholderGenerator: Generator? {
+        var editorPlaceholderPattern = "(<#)[^\"\\n]*"
+        editorPlaceholderPattern += "(#>)"
+        return regexGenerator(editorPlaceholderPattern, tokenType: SwiftTokenType.placeholder)
     }
 }

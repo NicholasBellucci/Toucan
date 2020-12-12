@@ -81,5 +81,3 @@ private extension RegexLexer {
         return .regex(RegexTokenGenerator(regex: regex, transformer: transformer))
     }
 }
-
-

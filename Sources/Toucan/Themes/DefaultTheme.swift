@@ -6,11 +6,11 @@ public struct DefaultTheme: EditorTheme {
     public init() { }
 
     public var backgroundColor: NSColor {
-        .white
+        NSColor(red: 42/255.0, green: 42/255, blue: 48/255, alpha: 1.0)
     }
 
     public var cursorColor: NSColor {
-        .black
+        .white
     }
 
     public var font: NSFont {
@@ -18,43 +18,49 @@ public struct DefaultTheme: EditorTheme {
     }
 
     public var foregroundColor: NSColor {
-        .black
+        .white
     }
 
     public var gutterStyle: GutterStyle {
-        GutterStyle(backgroundColor: backgroundColor, minimumWidth: 32)
+        GutterStyle(backgroundColor: NSColor(red: 42/255.0, green: 42/255, blue: 48/255, alpha: 1.0), minimumWidth: 32)
     }
 
     public var lineNumbersStyle: LineNumbersStyle {
-        LineNumbersStyle(font: .monospacedSystemFont(ofSize: 11, weight: .medium), textColor: NSColor(0x5D6C79))
+        LineNumbersStyle(font: .monospacedSystemFont(ofSize: 13, weight: .medium), textColor: lineNumbersColor)
+    }
+
+    private var lineNumbersColor: NSColor {
+        NSColor(red: 100/255, green: 100/255, blue: 100/255, alpha: 1)
     }
 
     public func color(for type: TokenType) -> NSColor {
         guard let type = type as? SwiftLexer.SwiftTokenType else { return .clear }
-        
+
         switch type {
         case .comment:
-            return NSColor(0x5D6C79)
-        case .customType:
-            return NSColor(0x1C464A)
-        case .identifier:
-            return NSColor(0x3900A0)
-        case .instanceVariable:
-            return NSColor(0x6C36A9)
-        case .keyword:
-            return NSColor(0x9B2393)
-        case .number:
-            return NSColor(0x1C00CF)
-        case .other:
-            return NSColor(0x0F68A0)
-        case .placeholder:
-            return NSColor(0xB7B7B7)
-        case .plain:
-            return NSColor(0x000000)
+            return NSColor(red: 69/255, green: 187/255, blue: 62/255, alpha: 1)
         case .string:
-            return NSColor(0xC41A16)
-        case .type:
-            return NSColor(0x0B4F79)
+            return NSColor(red: 252/255, green: 106/255, blue: 93/255, alpha: 1)
+        case .number:
+            return NSColor(red: 116/255, green: 109/255, blue: 176/255, alpha: 1)
+        case .keyword:
+            return NSColor(red: 252/255, green: 95/255, blue: 163/255, alpha: 1)
+        case .typeDeclaration:
+            return NSColor(red: 93/255, green: 216/255, blue: 255/255, alpha: 1)
+        case .otherDeclaration:
+            return NSColor(red: 65/255, green: 161/255, blue: 192/255, alpha: 1)
+        case .projectType:
+            return NSColor(red: 158/255, green: 241/255, blue: 221/255, alpha: 1)
+        case .projectVariable:
+            return NSColor(red: 103/255, green: 183/255, blue: 164/255, alpha: 1)
+        case .otherType:
+            return NSColor(red: 208/255, green: 168/255, blue: 255/255, alpha: 1)
+        case .otherFunction, .otherVariables:
+            return NSColor(red: 161/255, green: 103/255, blue: 230/255, alpha: 1)
+        case .placeholder:
+            return backgroundColor
+        case .plain:
+            return .white
         }
     }
 }
