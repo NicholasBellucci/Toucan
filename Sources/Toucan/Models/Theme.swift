@@ -27,6 +27,7 @@ public protocol Theme {
     var font: NSFont { get }
     var globalAttributes: [NSAttributedString.Key: Any] { get }
     var gutterStyle: GutterStyle { get }
+    var cursorColor: NSColor { get }
     var lineNumbersStyle: LineNumbersStyle { get }
 
     func attributes(for token: Token) -> [NSAttributedString.Key: Any]

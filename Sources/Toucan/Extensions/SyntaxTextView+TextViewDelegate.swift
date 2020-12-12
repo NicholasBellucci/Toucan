@@ -19,25 +19,21 @@ extension SyntaxView {
         self.invalidateCachedTokens()
         self.textView.invalidateCachedParagraphs()
 
-        if let delegate = delegate {
-            colorTextView(with: { (source) -> Lexer in
-                return delegate.lexerForSource(source)
-            })
+        if let lexer = lexer {
+            applySyntaxHightlighting(with: lexer)
         }
 
         wrapperView.setNeedsDisplay(wrapperView.bounds)
     }
 
     func selectionDidChange() {
-        guard let delegate = delegate else { return }
-
         if let cachedTokens = cachedTokens {
             updatePlaceholders(with: cachedTokens)
         }
 
-        colorTextView(with: { (source) -> Lexer in
-            return delegate.lexerForSource(source)
-        })
+        if let lexer = lexer {
+            applySyntaxHightlighting(with: lexer)
+        }
 
         previousSelectedRange = textView.selectedRange
     }

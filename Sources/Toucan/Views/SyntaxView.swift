@@ -4,7 +4,6 @@ import CoreGraphics
 
 public protocol SyntaxViewDelegate: class {
     func didChangeSelectedRange(_ syntaxView: SyntaxView, selectedRange: NSRange)
-    func lexerForSource(_ source: String) -> Lexer
     func textViewDidBeginEditing(_ textView: EditorTextView)
     func textViewTextDidChange(_ textView: EditorTextView)
 }
@@ -19,6 +18,7 @@ public class SyntaxView: NSView {
     var cachedTokens: [CachedToken]?
     var ignoreSelectionChange = false
     var previousSelectedRange: NSRange?
+    var lexer: Lexer?
 
     public weak var delegate: SyntaxViewDelegate?
 
@@ -44,7 +44,7 @@ public class SyntaxView: NSView {
         }
     }
 
-    public var theme: CodeTheme? {
+    public var theme: EditorTheme? {
         didSet {
             guard let theme = theme else { return }
 
@@ -56,13 +56,9 @@ public class SyntaxView: NSView {
         }
     }
 
-    public var tintColor: NSColor! {
-        set {
-            textView.tintColor = newValue
-        }
-        get {
-            return textView.tintColor
-        }
+    public var tintColor: NSColor {
+        set { textView.tintColor = newValue }
+        get { textView.tintColor }
     }
 
     internal lazy var wrapperView: TextViewWrapperView = {
@@ -125,7 +121,7 @@ public class SyntaxView: NSView {
 }
 
 extension SyntaxView {
-    func colorTextView(with lexer: (String) -> Lexer) {
+    func applySyntaxHightlighting(with lexer: Lexer) {
         guard let textStorage = textView.textStorage else { return }
 
         if let cachedTokens = cachedTokens {
@@ -133,7 +129,7 @@ extension SyntaxView {
         } else {
             guard let theme = theme else { return }
 
-            let cachedTokens: [CachedToken] = lexer(textView.text).tokens(from: textView.text).map {
+            let cachedTokens: [CachedToken] = lexer.tokens(from: textView.text).map {
                 let range = textView.text.range(from: $0.range)
                 return CachedToken(token: $0, range: range)
             }
@@ -179,7 +175,7 @@ private extension SyntaxView {
 }
 
 private extension SyntaxView {
-    func createAttributes(theme: CodeTheme, textStorage: NSTextStorage, cachedTokens: [CachedToken], source: String) {
+    func createAttributes(theme: EditorTheme, textStorage: NSTextStorage, cachedTokens: [CachedToken], source: String) {
         textStorage.beginEditing()
 
         var attributes: [NSAttributedString.Key: Any] = [:]

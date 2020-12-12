@@ -1,11 +1,11 @@
 import Foundation
 import Cocoa
 
-public protocol CodeTheme: Theme {
+public protocol EditorTheme: Theme {
     func color(for type: TokenType) -> NSColor
 }
 
-extension CodeTheme {
+extension EditorTheme {
     public var globalAttributes: [NSAttributedString.Key: Any] {
         [
             .font: font,
