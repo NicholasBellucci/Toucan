@@ -9,16 +9,16 @@ public struct DefaultTheme: EditorTheme {
         .white
     }
 
+    public var cursorColor: NSColor {
+        .black
+    }
+
     public var font: NSFont {
         .monospacedSystemFont(ofSize: 13, weight: .medium)
     }
 
     public var gutterStyle: GutterStyle {
         GutterStyle(backgroundColor: backgroundColor, minimumWidth: 32)
-    }
-
-    public var cursorColor: NSColor {
-        .black
     }
 
     public var lineNumbersStyle: LineNumbersStyle {

@@ -30,6 +30,7 @@ public struct SyntaxTextView: NSViewRepresentable {
         let wrappedView = SyntaxView()
         wrappedView.delegate = context.coordinator
         wrappedView.theme = theme
+        wrappedView.lexer = lexer
         wrappedView.textView.insertionPointColor = theme.cursorColor
 
         context.coordinator.wrappedView = wrappedView
@@ -52,7 +53,6 @@ extension SyntaxTextView {
 
         init(_ parent: SyntaxTextView) {
             self.parent = parent
-            wrappedView.lexer = parent.lexer
         }
 
         public func textViewTextDidChange(_ editorTextView: EditorTextView) {
