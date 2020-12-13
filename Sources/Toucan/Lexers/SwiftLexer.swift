@@ -33,8 +33,6 @@ public class SwiftLexer {
             commentsRegexGenerator,
             dotCommentsRegexGenerator,
             multidotCommentsRegexGenerator,
-            stringsRegexGenerator,
-            stringsWithAtRegexGenerator,
             numbersRegexGenerator,
             typeDeclarationRegexGenerator,
             otherDeclarationRegexGenerator,
@@ -47,6 +45,8 @@ public class SwiftLexer {
             keywordsGenerator,
             keywordsWithAtRegexGenerator,
             printGenerator,
+            stringsRegexGenerator,
+            stringsWithAtRegexGenerator,
             placeholderGenerator
         ]
         .compactMap({ $0 })
