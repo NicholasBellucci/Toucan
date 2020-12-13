@@ -45,6 +45,7 @@ public class SwiftLexer {
             swiftFunctionsGenerator,
             swiftVariablesGenerator,
             keywordsGenerator,
+            keywordsWithAtRegexGenerator,
             printGenerator,
             placeholderGenerator
         ]
@@ -60,7 +61,7 @@ extension SwiftLexer: RegexLexer {
 
 extension SwiftLexer {
     private var keywords: [String] {
-        "@objc as associatedtype break case catch class continue convenience default defer deinit else enum extension fallthrough false fileprivate final for func get guard if import in init inout internal is lazy let mutating nil nonmutating open operator override private protocol public repeat required rethrows return required self set static struct subscript super switch throw throws true try typealias unowned var weak where while precedencegroup".components(separatedBy: " ")
+        "as associatedtype break case catch class continue convenience default defer deinit else enum extension fallthrough false fileprivate final for func get guard if import in init inout internal is lazy let mutating nil nonmutating open operator override private protocol public repeat required rethrows return required self set static struct subscript super switch throw throws true try typealias unowned var weak where while precedencegroup".components(separatedBy: " ")
     }
 
     private var swiftIdentifiers: [String] {
@@ -117,6 +118,13 @@ private extension SwiftLexer {
     /// These keywords are stored in the keywords array.
     var keywordsGenerator: Generator? {
         keywordGenerator(keywords, tokenType: SwiftTokenType.keyword)
+    }
+
+    /// `Keywords`
+    ///
+    /// Regex and generator for keywords beginning with @.
+    var keywordsWithAtRegexGenerator: Generator? {
+        regexGenerator("(?=\\@)[A-Za-z_@]+\\w*", tokenType: SwiftTokenType.keyword)
     }
 
     /// `Type Declarations`
