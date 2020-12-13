@@ -10,7 +10,7 @@ public struct SyntaxTextView: NSViewRepresentable {
 
     public init(
         text: Binding<String>,
-        theme: EditorTheme = DefaultTheme(),
+        theme: EditorTheme = DefaultThemeLight(),
         lexer: Lexer = SwiftLexer(),
         didBeginEditing: (() -> ())? = nil,
         didChange: ((String) -> ())? = nil

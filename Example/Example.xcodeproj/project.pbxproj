@@ -33,6 +33,7 @@
 		4C78571925854218001FC7D1 /* RegexLexer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C78570125854218001FC7D1 /* RegexLexer.swift */; };
 		4C78571A25854218001FC7D1 /* DefaultTheme.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C78570325854218001FC7D1 /* DefaultTheme.swift */; };
 		4C78571B25854218001FC7D1 /* SyntaxTextView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C78570525854218001FC7D1 /* SyntaxTextView.swift */; };
+		4C7857242585B3AD001FC7D1 /* DefaultThemeDark.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C7857232585B3AD001FC7D1 /* DefaultThemeDark.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -65,6 +66,7 @@
 		4C78570125854218001FC7D1 /* RegexLexer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RegexLexer.swift; sourceTree = "<group>"; };
 		4C78570325854218001FC7D1 /* DefaultTheme.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DefaultTheme.swift; sourceTree = "<group>"; };
 		4C78570525854218001FC7D1 /* SyntaxTextView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SyntaxTextView.swift; sourceTree = "<group>"; };
+		4C7857232585B3AD001FC7D1 /* DefaultThemeDark.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefaultThemeDark.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -130,7 +132,7 @@
 			children = (
 				4C7856E925854218001FC7D1 /* Models */,
 				4C7856EE25854218001FC7D1 /* Extensions */,
-				4C7856F425854218001FC7D1 /* Languages */,
+				4C7856F425854218001FC7D1 /* Lexers */,
 				4C7856F625854218001FC7D1 /* CodeTheme.swift */,
 				4C7856F725854218001FC7D1 /* TokenType.swift */,
 				4C7856F825854218001FC7D1 /* Generators */,
@@ -165,12 +167,12 @@
 			path = Extensions;
 			sourceTree = "<group>";
 		};
-		4C7856F425854218001FC7D1 /* Languages */ = {
+		4C7856F425854218001FC7D1 /* Lexers */ = {
 			isa = PBXGroup;
 			children = (
 				4C7856F525854218001FC7D1 /* SwiftLexer.swift */,
 			);
-			path = Languages;
+			path = Lexers;
 			sourceTree = "<group>";
 		};
 		4C7856F825854218001FC7D1 /* Generators */ = {
@@ -198,6 +200,7 @@
 			isa = PBXGroup;
 			children = (
 				4C78570325854218001FC7D1 /* DefaultTheme.swift */,
+				4C7857232585B3AD001FC7D1 /* DefaultThemeDark.swift */,
 			);
 			path = Themes;
 			sourceTree = "<group>";
@@ -283,6 +286,7 @@
 				4C78570C25854218001FC7D1 /* SyntaxTextView+TextViewDelegate.swift in Sources */,
 				4C78571525854218001FC7D1 /* EditorTextView.swift in Sources */,
 				4C78571A25854218001FC7D1 /* DefaultTheme.swift in Sources */,
+				4C7857242585B3AD001FC7D1 /* DefaultThemeDark.swift in Sources */,
 				4C78570625854218001FC7D1 /* Paragraph.swift in Sources */,
 				4C78570725854218001FC7D1 /* PlaceholderState.swift in Sources */,
 				4C78571425854218001FC7D1 /* SyntaxView.swift in Sources */,

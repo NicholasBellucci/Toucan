@@ -62,15 +62,20 @@ extension RegexLexer {
 
 public extension RegexLexer {
     func regexGenerator(_ pattern: String, options: NSRegularExpression.Options = [], tokenType: TokenType) -> Generator? {
-        return regexGenerator(pattern, options: options, transformer: { range -> Token in
-            return SourceCodeToken(type: tokenType, range: range)
-        })
+        regexGenerator(pattern, options: options) {
+            return SourceCodeToken(type: tokenType, range: $0)
+        }
     }
 
     func keywordGenerator(_ words: [String], tokenType: TokenType) -> Generator {
-        return .keywords(KeywordTokenGenerator(keywords: words, transformer: { range -> Token in
-            return SourceCodeToken(type: tokenType, range: range)
-        }))
+        .keywords(
+            KeywordTokenGenerator(
+                keywords: words,
+                transformer: {
+                    return SourceCodeToken(type: tokenType, range: $0)
+                }
+            )
+        )
     }
 }
 

@@ -1,16 +1,16 @@
 import Cocoa
 import Foundation
 
-// Xcode Theme: Default (Light)
-public struct DefaultThemeLight: EditorTheme {
+// Xcode Theme: Default (Dark)
+public struct DefaultThemeDark: EditorTheme {
     public init() { }
 
     public var backgroundColor: NSColor {
-        .white
+        NSColor(0x1F1F24)
     }
 
     public var cursorColor: NSColor {
-        .black
+        .white
     }
 
     public var font: NSFont {
@@ -18,7 +18,7 @@ public struct DefaultThemeLight: EditorTheme {
     }
 
     public var foregroundColor: NSColor {
-        .black
+        .white
     }
 
     public var gutterStyle: GutterStyle {
@@ -26,7 +26,7 @@ public struct DefaultThemeLight: EditorTheme {
     }
 
     public var lineNumbersStyle: LineNumbersStyle {
-        LineNumbersStyle(font: .monospacedSystemFont(ofSize: 11, weight: .medium), textColor: NSColor(0x5D6C79))
+        LineNumbersStyle(font: .monospacedSystemFont(ofSize: 11, weight: .medium), textColor: NSColor(0x646464))
     }
 
     public func color(for type: TokenType) -> NSColor {
@@ -34,31 +34,31 @@ public struct DefaultThemeLight: EditorTheme {
 
         switch type {
         case .comment:
-            return NSColor(0x5D6C79)
+            return NSColor(0x6C7986)
         case .string:
-            return NSColor(0xC41A16)
+            return NSColor(0xFC6A5D)
         case .number:
-            return NSColor(0x1C00CF)
+            return NSColor(0xD0BF69)
         case .keyword:
-            return NSColor(0x9B2393)
+            return NSColor(0xFC5FA3)
         case .typeDeclaration:
-            return NSColor(0x0B4F79)
+            return NSColor(0x5DD8FF)
         case .otherDeclaration:
-            return NSColor(0x0F68A0)
+            return NSColor(0x41A1C0)
         case .projectType:
-            return NSColor(0x1C464A)
+            return NSColor(0x9EF1DD)
         case .projectVariable:
-            return NSColor(0x326D74)
+            return NSColor(0x67B7A4)
         case .otherType:
-            return NSColor(0x3900A0)
+            return NSColor(0xD0A8FF)
         case .otherFunction:
-            return NSColor(0x6C36A9)
+            return NSColor(0xA167E6)
         case .otherVariables:
-            return NSColor(0x6C36A9)
+            return NSColor(0xA167E6)
         case .placeholder:
             return backgroundColor
         case .plain:
-            return .black
+            return .white
         }
     }
 }
