@@ -6,7 +6,7 @@ public struct DefaultThemeDark: EditorTheme {
     public init() { }
 
     public var backgroundColor: NSColor {
-        NSColor(0x1F1F24)
+        NSColor(0x2A2A30)
     }
 
     public var cursorColor: NSColor {
