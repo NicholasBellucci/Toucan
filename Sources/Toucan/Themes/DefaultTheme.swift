@@ -56,7 +56,7 @@ public struct DefaultThemeLight: EditorTheme {
         case .otherVariables:
             return NSColor(0x6C36A9)
         case .placeholder:
-            return backgroundColor
+            return .white
         case .plain:
             return .black
         }

@@ -35,25 +35,24 @@ public class SwiftLexer {
     /// should take precedent must come after any other applicable rules.
     private var generators: [Generator] {
         [
-            projectTypeRegexGenerator,
-            commentsRegexGenerator,
-            dotCommentsRegexGenerator,
-            multidotCommentsRegexGenerator,
-            numbersRegexGenerator,
             typeDeclarationRegexGenerator,
             otherDeclarationRegexGenerator,
             projectTypeRegexGenerator,
+            swiftVariablesGenerator,
             projectVariablesRegexGenerator,
             swiftLibraryTypesGenerator,
             swiftIdentifiersGenerator,
             swiftFunctionsGenerator,
-            swiftVariablesGenerator,
+            commentsRegexGenerator,
+            dotCommentsRegexGenerator,
+            multidotCommentsRegexGenerator,
             keywordsGenerator,
             keywordsWithAtRegexGenerator,
             selfPrefixRegexGenerator,
             printGenerator,
             stringsRegexGenerator,
             stringsWithAtRegexGenerator,
+            numbersRegexGenerator,
             placeholderGenerator
         ]
         .compactMap({ $0 })
@@ -203,7 +202,7 @@ private extension SwiftLexer {
     ///
     /// Regex and generator for other swift variables.
     var swiftVariablesGenerator: Generator? {
-        regexGenerator("(?(?=(?<=\\bself.))|(?<=\\.)[A-Za-z_]+\\w*)", tokenType: SwiftTokenType.otherVariables)
+        regexGenerator("(?<=\\.)[A-Za-z_]+\\w*", tokenType: SwiftTokenType.otherVariables)
     }
 
     /// `Print`

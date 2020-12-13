@@ -108,17 +108,16 @@ public class SyntaxView: NSView {
         let textView = EditorTextView(frame: .zero, textContainer: textContainer)
         textView.delegate = self
         textView.text = ""
+        textView.isEditable = textViewIsEditable
+        textView.allowsUndo = textViewAllowsUndo
         textView.gutterWidth = 20
         textView.minSize = NSSize(width: 0.0, height: self.bounds.height)
         textView.maxSize = NSSize(width: CGFloat.greatestFiniteMagnitude, height: CGFloat.greatestFiniteMagnitude)
         textView.isVerticallyResizable = true
         textView.isHorizontallyResizable = false
         textView.autoresizingMask = [.width, .height]
-        textView.isEditable = textViewIsEditable
         textView.isAutomaticQuoteSubstitutionEnabled = false
-        textView.allowsUndo = textViewAllowsUndo
         textView.textContainer?.containerSize = NSSize(width: self.bounds.width, height: .greatestFiniteMagnitude)
-        textView.textContainer?.widthTracksTextView = true
         return textView
     }()
 
