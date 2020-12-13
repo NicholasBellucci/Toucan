@@ -27,10 +27,8 @@ public class SwiftLexer {
 
     public init() { }
 
-    private lazy var generators: [Generator] = {
-
-
-        return [
+    private var generators: [Generator] {
+        [
             projectTypeRegexGenerator,
             commentsRegexGenerator,
             dotCommentsRegexGenerator,
@@ -51,7 +49,7 @@ public class SwiftLexer {
             placeholderGenerator
         ]
         .compactMap({ $0 })
-    }()
+    }
 }
 
 extension SwiftLexer: RegexLexer {
@@ -172,10 +170,16 @@ private extension SwiftLexer {
         keywordGenerator(swiftIdentifiers, tokenType: SwiftTokenType.otherType)
     }
 
+    /// `Other Function Names`
+    ///
+    /// Regex and generator for other swift functions.
     var swiftFunctionsGenerator: Generator? {
         regexGenerator("(?<=\\s)([a-zA-Z]*?)(?=\\()", tokenType: SwiftTokenType.otherFunction)
     }
 
+    /// `Other Variable Names`
+    ///
+    /// Regex and generator for other swift variables.
     var swiftVariablesGenerator: Generator? {
         regexGenerator("(?<=\\.)[A-Za-z_]+\\w*", tokenType: SwiftTokenType.otherVariables)
     }
