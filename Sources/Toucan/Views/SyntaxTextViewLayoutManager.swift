@@ -31,7 +31,7 @@ class SyntaxViewLayoutManager: NSLayoutManager {
 
             switch $1 {
             case .active:
-                color = NSColor.white.withAlphaComponent(0.8)
+                color = .systemBlue
             case .inactive:
                 color = .darkGray
             }

@@ -70,7 +70,7 @@ extension SyntaxView {
                     if isPlaceholderSelected(selectedRange: textView.selectedRange, tokenRange: $0.range),
                        textView.selectedRange.location >= $0.range.location || textView.selectedRange.upperBound <= $0.range.upperBound {
 
-                        updateSelectedRange(NSRange(location: $0.range.location+1, length: 0))
+                        updateSelectedRange(NSRange(location: $0.range.location + 1, length: 0))
                     }
                 }
             }

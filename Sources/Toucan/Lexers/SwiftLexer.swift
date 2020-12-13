@@ -27,6 +27,12 @@ public class SwiftLexer {
 
     public init() { }
 
+    /// Regex Generators for Swift Lexer
+    ///
+    /// These are all of the regex rules and keyword tokenizers
+    /// for the swift lexer. The order of these in the array matters
+    /// as some rules apply to multiple occurences and the rule that
+    /// should take precedent must come after any other applicable rules.
     private var generators: [Generator] {
         [
             projectTypeRegexGenerator,
@@ -44,6 +50,7 @@ public class SwiftLexer {
             swiftVariablesGenerator,
             keywordsGenerator,
             keywordsWithAtRegexGenerator,
+            selfPrefixRegexGenerator,
             printGenerator,
             stringsRegexGenerator,
             stringsWithAtRegexGenerator,
@@ -127,6 +134,13 @@ private extension SwiftLexer {
         regexGenerator("(?=\\@)[A-Za-z_@]+\\w*", tokenType: SwiftTokenType.keyword)
     }
 
+    /// `Keywords`
+    ///
+    /// Regex and generator for `self` followed by a `.`.
+    var selfPrefixRegexGenerator: Generator? {
+        regexGenerator("\\bself(?=\\.)", tokenType: SwiftTokenType.keyword)
+    }
+
     /// `Type Declarations`
     ///
     /// Regex and generator for type declarations.
@@ -151,7 +165,7 @@ private extension SwiftLexer {
     /// These are determined to occur after colons either in [] or freeform
     /// uness the variable prefix is that of a swift library.
     var projectTypeRegexGenerator: Generator? {
-        regexGenerator("(?<=\\b:\\s)(\\w+)|(?<=\\[)(.*?)(?=\\])", tokenType: SwiftTokenType.projectType)
+        regexGenerator("(?<=\\b:\\s)(\\w+)|(?<=\\[)([\\w\\d]*?)(?=\\])", tokenType: SwiftTokenType.projectType)
     }
 
     /// `Project Instance Variable`
@@ -159,7 +173,7 @@ private extension SwiftLexer {
     /// Regex and generator for project instance variables.
     /// All variables that follow a `.` are assumed to be project.
     var projectVariablesRegexGenerator: Generator? {
-        regexGenerator("\\bself(?=\\.)", tokenType: SwiftTokenType.keyword)
+        regexGenerator("(?<=\\bself.)(\\w+)", tokenType: SwiftTokenType.projectVariable)
     }
 
     /// `Other Type Names`
@@ -189,7 +203,7 @@ private extension SwiftLexer {
     ///
     /// Regex and generator for other swift variables.
     var swiftVariablesGenerator: Generator? {
-        regexGenerator("(?<=\\.)[A-Za-z_]+\\w*", tokenType: SwiftTokenType.otherVariables)
+        regexGenerator("(?(?=(?<=\\bself.))|(?<=\\.)[A-Za-z_]+\\w*)", tokenType: SwiftTokenType.otherVariables)
     }
 
     /// `Print`

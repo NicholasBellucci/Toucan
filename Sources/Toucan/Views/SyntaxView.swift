@@ -216,8 +216,8 @@ private extension SyntaxView {
 
                     textStorage.addAttributes(theme.attributes(for: $0.token), range: contentRange)
                     textStorage.addAttributes([.placeholder: PlaceholderState.inactive], range: range)
-                    textStorage.addAttributes([.foregroundColor: NSColor.clear, .font: NSFont.systemFont(ofSize: 0.01)], range: startRange)
-                    textStorage.addAttributes([.foregroundColor: NSColor.clear, .font: NSFont.systemFont(ofSize: 0.01)], range: endRange)
+                    textStorage.addAttributes([.foregroundColor: NSColor.clear, .font: NSFont.systemFont(ofSize: 2)], range: startRange)
+                    textStorage.addAttributes([.foregroundColor: NSColor.clear, .font: NSFont.systemFont(ofSize: 1)], range: endRange)
                 } else {
                     textStorage.addAttributes(theme.attributes(for: $0.token), range: range)
                 }

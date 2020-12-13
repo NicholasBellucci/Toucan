@@ -56,7 +56,7 @@ public struct DefaultThemeDark: EditorTheme {
         case .otherVariables:
             return NSColor(0xA167E6)
         case .placeholder:
-            return backgroundColor
+            return .white
         case .plain:
             return .white
         }
