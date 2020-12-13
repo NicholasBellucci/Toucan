@@ -5,21 +5,20 @@ public struct SyntaxTextView: NSViewRepresentable {
     @Binding private var text: String
     private var lexer: Lexer
     private var theme: EditorTheme
-    private var didBeginEditing: (() -> ())?
-    private var didChange: ((String) -> ())?
+
+    private var isEditable: Bool = true
+    private var allowsUndo: Bool = false
+    private var textDidBeginEditing: (() -> ())?
+    private var textDidChange: ((String) -> ())?
 
     public init(
         text: Binding<String>,
         theme: EditorTheme = DefaultThemeLight(),
-        lexer: Lexer = SwiftLexer(),
-        didBeginEditing: (() -> ())? = nil,
-        didChange: ((String) -> ())? = nil
+        lexer: Lexer = SwiftLexer()
     ) {
         _text = text
         self.theme = theme
         self.lexer = lexer
-        self.didBeginEditing = didBeginEditing
-        self.didChange = didChange
     }
 
     public func makeCoordinator() -> Coordinator {
@@ -31,6 +30,8 @@ public struct SyntaxTextView: NSViewRepresentable {
         wrappedView.delegate = context.coordinator
         wrappedView.theme = theme
         wrappedView.lexer = lexer
+        wrappedView.textViewIsEditable = isEditable
+        wrappedView.textViewAllowsUndo = allowsUndo
         wrappedView.textView.insertionPointColor = theme.cursorColor
 
         context.coordinator.wrappedView = wrappedView
@@ -58,11 +59,37 @@ extension SyntaxTextView {
         public func textViewTextDidChange(_ editorTextView: EditorTextView) {
             selectedRanges = editorTextView.selectedRanges
             parent.text = editorTextView.text
-            parent.didChange?(editorTextView.text)
+            parent.textDidChange?(editorTextView.text)
         }
 
         public func textViewDidBeginEditing(_ editorTextView: EditorTextView) {
-            parent.didBeginEditing?()
+            parent.textDidBeginEditing?()
         }
+    }
+}
+
+public extension SyntaxTextView {
+    func isEditable(_ value: Bool) -> SyntaxTextView {
+        var copy = self
+        copy.isEditable = value
+        return copy
+    }
+
+    func allowsUndo(_ value: Bool) -> SyntaxTextView {
+        var copy = self
+        copy.allowsUndo = value
+        return copy
+    }
+
+    func textDidBeginEditing(_ handler: @escaping (() -> ())) -> SyntaxTextView {
+        var copy = self
+        copy.textDidBeginEditing = handler
+        return copy
+    }
+
+    func textDidChange(_ handler: @escaping ((String) -> ())) -> SyntaxTextView {
+        var copy = self
+        copy.textDidChange = handler
+        return copy
     }
 }

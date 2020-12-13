@@ -24,16 +24,6 @@ public class SyntaxView: NSView {
 
     private var textViewSelectedRangeObserver: NSKeyValueObservation?
 
-    public var selectedRanges: [NSValue] = [] {
-        didSet {
-            guard selectedRanges.count > 0 else {
-                return
-            }
-
-            textView.selectedRanges = selectedRanges
-        }
-    }
-
     public var text: String {
         get { textView.string }
         set {
@@ -53,6 +43,28 @@ public class SyntaxView: NSView {
             textView.font = theme.font
 
             textDidChange()
+        }
+    }
+
+    public var textViewIsEditable: Bool = true {
+        didSet {
+            textView.isEditable = textViewIsEditable
+        }
+    }
+
+    public var textViewAllowsUndo: Bool = true {
+        didSet {
+            textView.allowsUndo = textViewAllowsUndo
+        }
+    }
+
+    public var selectedRanges: [NSValue] = [] {
+        didSet {
+            guard selectedRanges.count > 0 else {
+                return
+            }
+
+            textView.selectedRanges = selectedRanges
         }
     }
 
@@ -102,9 +114,9 @@ public class SyntaxView: NSView {
         textView.isVerticallyResizable = true
         textView.isHorizontallyResizable = false
         textView.autoresizingMask = [.width, .height]
-        textView.isEditable = true
+        textView.isEditable = textViewIsEditable
         textView.isAutomaticQuoteSubstitutionEnabled = false
-        textView.allowsUndo = true
+        textView.allowsUndo = textViewAllowsUndo
         textView.textContainer?.containerSize = NSSize(width: self.bounds.width, height: .greatestFiniteMagnitude)
         textView.textContainer?.widthTracksTextView = true
         return textView
