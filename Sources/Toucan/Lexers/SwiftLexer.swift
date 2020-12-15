@@ -216,8 +216,8 @@ private extension SwiftLexer {
     ///
     /// Regex and generator for placeholders.
     var placeholderGenerator: Generator? {
-        var editorPlaceholderPattern = "(<#)[^\"\\n]*"
-        editorPlaceholderPattern += "(#>)"
+        var editorPlaceholderPattern = "(\\<#)([\\w\\d]*?)"
+        editorPlaceholderPattern += "(\\#>)"
         return regexGenerator(editorPlaceholderPattern, tokenType: SwiftTokenType.placeholder)
     }
 }
