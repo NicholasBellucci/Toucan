@@ -50,9 +50,9 @@ public class SwiftLexer {
             keywordsWithAtRegexGenerator,
             selfPrefixRegexGenerator,
             printGenerator,
+            numbersRegexGenerator,
             stringsRegexGenerator,
             stringsWithAtRegexGenerator,
-            numbersRegexGenerator,
             placeholderGenerator
         ]
         .compactMap({ $0 })
