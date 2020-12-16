@@ -7,6 +7,7 @@ public struct SyntaxTextView: NSViewRepresentable {
     private var lexer: Lexer
 
     private var isEditable: Bool = true
+    private var isFirstResponder: Bool = false
     private var allowsUndo: Bool = false
     private var textDidBeginEditing: (() -> ())?
     private var textDidChange: ((String) -> ())?
@@ -45,6 +46,14 @@ public struct SyntaxTextView: NSViewRepresentable {
         context.coordinator.wrappedView.lexer = lexer
         context.coordinator.wrappedView.text = text
         view.selectedRanges = context.coordinator.selectedRanges
+
+        if isFirstResponder && !context.coordinator.didBecomeFirstResponder  {
+            DispatchQueue.main.async {
+                view.window?.makeFirstResponder(view.textView)
+            }
+
+            context.coordinator.didBecomeFirstResponder = true
+        }
     }
 }
 
@@ -53,6 +62,7 @@ extension SyntaxTextView {
         let parent: SyntaxTextView
         var wrappedView: SyntaxView!
         var selectedRanges: [NSValue] = []
+        var didBecomeFirstResponder = false
 
         init(_ parent: SyntaxTextView) {
             self.parent = parent
@@ -74,6 +84,12 @@ public extension SyntaxTextView {
     func isEditable(_ value: Bool) -> SyntaxTextView {
         var copy = self
         copy.isEditable = value
+        return copy
+    }
+
+    func isFirstResponder(_ value: Bool) -> SyntaxTextView {
+        var copy = self
+        copy.isFirstResponder = value
         return copy
     }
 
