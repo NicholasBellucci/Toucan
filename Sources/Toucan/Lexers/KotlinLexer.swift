@@ -1,6 +1,6 @@
 import Foundation
 
-public class KotlinLexer {
+public struct KotlinLexer {
     public enum KotlinTokenType: TokenType {
         case comma
         case comment

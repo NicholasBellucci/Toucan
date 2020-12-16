@@ -1,6 +1,6 @@
 import Foundation
 
-public class SwiftLexer {
+public struct SwiftLexer {
     public enum SwiftTokenType: TokenType {
         case comment
         case string
