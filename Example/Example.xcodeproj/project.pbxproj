@@ -7,36 +7,61 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		4C1C8478258977B600915B24 /* KotlinLexer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C1C845A258977B600915B24 /* KotlinLexer.swift */; };
+		4C1C8479258977B600915B24 /* SwiftLexer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C1C845B258977B600915B24 /* SwiftLexer.swift */; };
+		4C1C847A258977B600915B24 /* Paragraph.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C1C845D258977B600915B24 /* Paragraph.swift */; };
+		4C1C847B258977B600915B24 /* PlaceholderState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C1C845E258977B600915B24 /* PlaceholderState.swift */; };
+		4C1C847C258977B600915B24 /* Theme.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C1C845F258977B600915B24 /* Theme.swift */; };
+		4C1C847D258977B600915B24 /* Token.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C1C8460258977B600915B24 /* Token.swift */; };
+		4C1C847E258977B600915B24 /* EditorTextView+Utils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C1C8462258977B600915B24 /* EditorTextView+Utils.swift */; };
+		4C1C847F258977B600915B24 /* NSTextView+Utils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C1C8463258977B600915B24 /* NSTextView+Utils.swift */; };
+		4C1C8480258977B600915B24 /* SyntaxTextView+TextViewDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C1C8464258977B600915B24 /* SyntaxTextView+TextViewDelegate.swift */; };
+		4C1C8481258977B600915B24 /* NSColor+Hex.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C1C8465258977B600915B24 /* NSColor+Hex.swift */; };
+		4C1C8482258977B600915B24 /* String+Utils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C1C8466258977B600915B24 /* String+Utils.swift */; };
+		4C1C8483258977B600915B24 /* CodeTheme.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C1C8467258977B600915B24 /* CodeTheme.swift */; };
+		4C1C8484258977B600915B24 /* TokenType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C1C8468258977B600915B24 /* TokenType.swift */; };
+		4C1C8485258977B600915B24 /* KeywordTokenGenerator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C1C846A258977B600915B24 /* KeywordTokenGenerator.swift */; };
+		4C1C8486258977B600915B24 /* RegexTokenGenerator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C1C846B258977B600915B24 /* RegexTokenGenerator.swift */; };
+		4C1C8487258977B600915B24 /* SyntaxView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C1C846D258977B600915B24 /* SyntaxView.swift */; };
+		4C1C8488258977B600915B24 /* EditorTextView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C1C846E258977B600915B24 /* EditorTextView.swift */; };
+		4C1C8489258977B600915B24 /* TextViewWrapperView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C1C846F258977B600915B24 /* TextViewWrapperView.swift */; };
+		4C1C848A258977B600915B24 /* LineNumberLayoutManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C1C8470258977B600915B24 /* LineNumberLayoutManager.swift */; };
+		4C1C848B258977B600915B24 /* SyntaxTextViewLayoutManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C1C8471258977B600915B24 /* SyntaxTextViewLayoutManager.swift */; };
+		4C1C848C258977B600915B24 /* RegexLexer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C1C8472258977B600915B24 /* RegexLexer.swift */; };
+		4C1C848D258977B600915B24 /* DefaultThemeLight.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C1C8474258977B600915B24 /* DefaultThemeLight.swift */; };
+		4C1C848E258977B600915B24 /* DefaultThemeDark.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C1C8475258977B600915B24 /* DefaultThemeDark.swift */; };
+		4C1C848F258977B600915B24 /* SyntaxTextView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C1C8477258977B600915B24 /* SyntaxTextView.swift */; };
 		4C7856D725854200001FC7D1 /* ExampleApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C7856D625854200001FC7D1 /* ExampleApp.swift */; };
 		4C7856D925854200001FC7D1 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C7856D825854200001FC7D1 /* ContentView.swift */; };
 		4C7856DB25854202001FC7D1 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 4C7856DA25854202001FC7D1 /* Assets.xcassets */; };
 		4C7856DE25854202001FC7D1 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 4C7856DD25854202001FC7D1 /* Preview Assets.xcassets */; };
-		4C78570625854218001FC7D1 /* Paragraph.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C7856EA25854218001FC7D1 /* Paragraph.swift */; };
-		4C78570725854218001FC7D1 /* PlaceholderState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C7856EB25854218001FC7D1 /* PlaceholderState.swift */; };
-		4C78570825854218001FC7D1 /* Theme.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C7856EC25854218001FC7D1 /* Theme.swift */; };
-		4C78570925854218001FC7D1 /* Token.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C7856ED25854218001FC7D1 /* Token.swift */; };
-		4C78570A25854218001FC7D1 /* EditorTextView+Utils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C7856EF25854218001FC7D1 /* EditorTextView+Utils.swift */; };
-		4C78570B25854218001FC7D1 /* NSTextView+Utils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C7856F025854218001FC7D1 /* NSTextView+Utils.swift */; };
-		4C78570C25854218001FC7D1 /* SyntaxTextView+TextViewDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C7856F125854218001FC7D1 /* SyntaxTextView+TextViewDelegate.swift */; };
-		4C78570D25854218001FC7D1 /* NSColor+Hex.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C7856F225854218001FC7D1 /* NSColor+Hex.swift */; };
-		4C78570E25854218001FC7D1 /* String+Utils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C7856F325854218001FC7D1 /* String+Utils.swift */; };
-		4C78570F25854218001FC7D1 /* SwiftLexer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C7856F525854218001FC7D1 /* SwiftLexer.swift */; };
-		4C78571025854218001FC7D1 /* CodeTheme.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C7856F625854218001FC7D1 /* CodeTheme.swift */; };
-		4C78571125854218001FC7D1 /* TokenType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C7856F725854218001FC7D1 /* TokenType.swift */; };
-		4C78571225854218001FC7D1 /* KeywordTokenGenerator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C7856F925854218001FC7D1 /* KeywordTokenGenerator.swift */; };
-		4C78571325854218001FC7D1 /* RegexTokenGenerator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C7856FA25854218001FC7D1 /* RegexTokenGenerator.swift */; };
-		4C78571425854218001FC7D1 /* SyntaxView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C7856FC25854218001FC7D1 /* SyntaxView.swift */; };
-		4C78571525854218001FC7D1 /* EditorTextView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C7856FD25854218001FC7D1 /* EditorTextView.swift */; };
-		4C78571625854218001FC7D1 /* TextViewWrapperView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C7856FE25854218001FC7D1 /* TextViewWrapperView.swift */; };
-		4C78571725854218001FC7D1 /* LineNumberLayoutManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C7856FF25854218001FC7D1 /* LineNumberLayoutManager.swift */; };
-		4C78571825854218001FC7D1 /* SyntaxTextViewLayoutManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C78570025854218001FC7D1 /* SyntaxTextViewLayoutManager.swift */; };
-		4C78571925854218001FC7D1 /* RegexLexer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C78570125854218001FC7D1 /* RegexLexer.swift */; };
-		4C78571A25854218001FC7D1 /* DefaultTheme.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C78570325854218001FC7D1 /* DefaultTheme.swift */; };
-		4C78571B25854218001FC7D1 /* SyntaxTextView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C78570525854218001FC7D1 /* SyntaxTextView.swift */; };
-		4C7857242585B3AD001FC7D1 /* DefaultThemeDark.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C7857232585B3AD001FC7D1 /* DefaultThemeDark.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		4C1C845A258977B600915B24 /* KotlinLexer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KotlinLexer.swift; sourceTree = "<group>"; };
+		4C1C845B258977B600915B24 /* SwiftLexer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SwiftLexer.swift; sourceTree = "<group>"; };
+		4C1C845D258977B600915B24 /* Paragraph.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Paragraph.swift; sourceTree = "<group>"; };
+		4C1C845E258977B600915B24 /* PlaceholderState.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PlaceholderState.swift; sourceTree = "<group>"; };
+		4C1C845F258977B600915B24 /* Theme.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Theme.swift; sourceTree = "<group>"; };
+		4C1C8460258977B600915B24 /* Token.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Token.swift; sourceTree = "<group>"; };
+		4C1C8462258977B600915B24 /* EditorTextView+Utils.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "EditorTextView+Utils.swift"; sourceTree = "<group>"; };
+		4C1C8463258977B600915B24 /* NSTextView+Utils.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "NSTextView+Utils.swift"; sourceTree = "<group>"; };
+		4C1C8464258977B600915B24 /* SyntaxTextView+TextViewDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "SyntaxTextView+TextViewDelegate.swift"; sourceTree = "<group>"; };
+		4C1C8465258977B600915B24 /* NSColor+Hex.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "NSColor+Hex.swift"; sourceTree = "<group>"; };
+		4C1C8466258977B600915B24 /* String+Utils.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "String+Utils.swift"; sourceTree = "<group>"; };
+		4C1C8467258977B600915B24 /* CodeTheme.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CodeTheme.swift; sourceTree = "<group>"; };
+		4C1C8468258977B600915B24 /* TokenType.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TokenType.swift; sourceTree = "<group>"; };
+		4C1C846A258977B600915B24 /* KeywordTokenGenerator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KeywordTokenGenerator.swift; sourceTree = "<group>"; };
+		4C1C846B258977B600915B24 /* RegexTokenGenerator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RegexTokenGenerator.swift; sourceTree = "<group>"; };
+		4C1C846D258977B600915B24 /* SyntaxView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SyntaxView.swift; sourceTree = "<group>"; };
+		4C1C846E258977B600915B24 /* EditorTextView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EditorTextView.swift; sourceTree = "<group>"; };
+		4C1C846F258977B600915B24 /* TextViewWrapperView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TextViewWrapperView.swift; sourceTree = "<group>"; };
+		4C1C8470258977B600915B24 /* LineNumberLayoutManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LineNumberLayoutManager.swift; sourceTree = "<group>"; };
+		4C1C8471258977B600915B24 /* SyntaxTextViewLayoutManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SyntaxTextViewLayoutManager.swift; sourceTree = "<group>"; };
+		4C1C8472258977B600915B24 /* RegexLexer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RegexLexer.swift; sourceTree = "<group>"; };
+		4C1C8474258977B600915B24 /* DefaultThemeLight.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DefaultThemeLight.swift; sourceTree = "<group>"; };
+		4C1C8475258977B600915B24 /* DefaultThemeDark.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DefaultThemeDark.swift; sourceTree = "<group>"; };
+		4C1C8477258977B600915B24 /* SyntaxTextView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SyntaxTextView.swift; sourceTree = "<group>"; };
 		4C7856D325854200001FC7D1 /* Example.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Example.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		4C7856D625854200001FC7D1 /* ExampleApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExampleApp.swift; sourceTree = "<group>"; };
 		4C7856D825854200001FC7D1 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -44,29 +69,6 @@
 		4C7856DD25854202001FC7D1 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		4C7856DF25854202001FC7D1 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		4C7856E025854202001FC7D1 /* Example.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Example.entitlements; sourceTree = "<group>"; };
-		4C7856EA25854218001FC7D1 /* Paragraph.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Paragraph.swift; sourceTree = "<group>"; };
-		4C7856EB25854218001FC7D1 /* PlaceholderState.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PlaceholderState.swift; sourceTree = "<group>"; };
-		4C7856EC25854218001FC7D1 /* Theme.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Theme.swift; sourceTree = "<group>"; };
-		4C7856ED25854218001FC7D1 /* Token.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Token.swift; sourceTree = "<group>"; };
-		4C7856EF25854218001FC7D1 /* EditorTextView+Utils.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "EditorTextView+Utils.swift"; sourceTree = "<group>"; };
-		4C7856F025854218001FC7D1 /* NSTextView+Utils.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "NSTextView+Utils.swift"; sourceTree = "<group>"; };
-		4C7856F125854218001FC7D1 /* SyntaxTextView+TextViewDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "SyntaxTextView+TextViewDelegate.swift"; sourceTree = "<group>"; };
-		4C7856F225854218001FC7D1 /* NSColor+Hex.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "NSColor+Hex.swift"; sourceTree = "<group>"; };
-		4C7856F325854218001FC7D1 /* String+Utils.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "String+Utils.swift"; sourceTree = "<group>"; };
-		4C7856F525854218001FC7D1 /* SwiftLexer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SwiftLexer.swift; sourceTree = "<group>"; };
-		4C7856F625854218001FC7D1 /* CodeTheme.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CodeTheme.swift; sourceTree = "<group>"; };
-		4C7856F725854218001FC7D1 /* TokenType.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TokenType.swift; sourceTree = "<group>"; };
-		4C7856F925854218001FC7D1 /* KeywordTokenGenerator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KeywordTokenGenerator.swift; sourceTree = "<group>"; };
-		4C7856FA25854218001FC7D1 /* RegexTokenGenerator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RegexTokenGenerator.swift; sourceTree = "<group>"; };
-		4C7856FC25854218001FC7D1 /* SyntaxView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SyntaxView.swift; sourceTree = "<group>"; };
-		4C7856FD25854218001FC7D1 /* EditorTextView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EditorTextView.swift; sourceTree = "<group>"; };
-		4C7856FE25854218001FC7D1 /* TextViewWrapperView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TextViewWrapperView.swift; sourceTree = "<group>"; };
-		4C7856FF25854218001FC7D1 /* LineNumberLayoutManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LineNumberLayoutManager.swift; sourceTree = "<group>"; };
-		4C78570025854218001FC7D1 /* SyntaxTextViewLayoutManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SyntaxTextViewLayoutManager.swift; sourceTree = "<group>"; };
-		4C78570125854218001FC7D1 /* RegexLexer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RegexLexer.swift; sourceTree = "<group>"; };
-		4C78570325854218001FC7D1 /* DefaultTheme.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DefaultTheme.swift; sourceTree = "<group>"; };
-		4C78570525854218001FC7D1 /* SyntaxTextView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SyntaxTextView.swift; sourceTree = "<group>"; };
-		4C7857232585B3AD001FC7D1 /* DefaultThemeDark.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefaultThemeDark.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -80,6 +82,102 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		4C1C8457258977B600915B24 /* Sources */ = {
+			isa = PBXGroup;
+			children = (
+				4C1C8458258977B600915B24 /* Toucan */,
+			);
+			name = Sources;
+			path = ../../Sources;
+			sourceTree = "<group>";
+		};
+		4C1C8458258977B600915B24 /* Toucan */ = {
+			isa = PBXGroup;
+			children = (
+				4C1C8459258977B600915B24 /* Lexers */,
+				4C1C845C258977B600915B24 /* Models */,
+				4C1C8461258977B600915B24 /* Extensions */,
+				4C1C8467258977B600915B24 /* CodeTheme.swift */,
+				4C1C8468258977B600915B24 /* TokenType.swift */,
+				4C1C8469258977B600915B24 /* Generators */,
+				4C1C846C258977B600915B24 /* Views */,
+				4C1C8472258977B600915B24 /* RegexLexer.swift */,
+				4C1C8473258977B600915B24 /* Themes */,
+				4C1C8476258977B600915B24 /* SwiftUI */,
+			);
+			path = Toucan;
+			sourceTree = "<group>";
+		};
+		4C1C8459258977B600915B24 /* Lexers */ = {
+			isa = PBXGroup;
+			children = (
+				4C1C845A258977B600915B24 /* KotlinLexer.swift */,
+				4C1C845B258977B600915B24 /* SwiftLexer.swift */,
+			);
+			path = Lexers;
+			sourceTree = "<group>";
+		};
+		4C1C845C258977B600915B24 /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				4C1C845D258977B600915B24 /* Paragraph.swift */,
+				4C1C845E258977B600915B24 /* PlaceholderState.swift */,
+				4C1C845F258977B600915B24 /* Theme.swift */,
+				4C1C8460258977B600915B24 /* Token.swift */,
+			);
+			path = Models;
+			sourceTree = "<group>";
+		};
+		4C1C8461258977B600915B24 /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				4C1C8462258977B600915B24 /* EditorTextView+Utils.swift */,
+				4C1C8463258977B600915B24 /* NSTextView+Utils.swift */,
+				4C1C8464258977B600915B24 /* SyntaxTextView+TextViewDelegate.swift */,
+				4C1C8465258977B600915B24 /* NSColor+Hex.swift */,
+				4C1C8466258977B600915B24 /* String+Utils.swift */,
+			);
+			path = Extensions;
+			sourceTree = "<group>";
+		};
+		4C1C8469258977B600915B24 /* Generators */ = {
+			isa = PBXGroup;
+			children = (
+				4C1C846A258977B600915B24 /* KeywordTokenGenerator.swift */,
+				4C1C846B258977B600915B24 /* RegexTokenGenerator.swift */,
+			);
+			path = Generators;
+			sourceTree = "<group>";
+		};
+		4C1C846C258977B600915B24 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				4C1C846D258977B600915B24 /* SyntaxView.swift */,
+				4C1C846E258977B600915B24 /* EditorTextView.swift */,
+				4C1C846F258977B600915B24 /* TextViewWrapperView.swift */,
+				4C1C8470258977B600915B24 /* LineNumberLayoutManager.swift */,
+				4C1C8471258977B600915B24 /* SyntaxTextViewLayoutManager.swift */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
+		4C1C8473258977B600915B24 /* Themes */ = {
+			isa = PBXGroup;
+			children = (
+				4C1C8474258977B600915B24 /* DefaultThemeLight.swift */,
+				4C1C8475258977B600915B24 /* DefaultThemeDark.swift */,
+			);
+			path = Themes;
+			sourceTree = "<group>";
+		};
+		4C1C8476258977B600915B24 /* SwiftUI */ = {
+			isa = PBXGroup;
+			children = (
+				4C1C8477258977B600915B24 /* SyntaxTextView.swift */,
+			);
+			path = SwiftUI;
+			sourceTree = "<group>";
+		};
 		4C7856CA25854200001FC7D1 = {
 			isa = PBXGroup;
 			children = (
@@ -101,7 +199,7 @@
 			children = (
 				4C7856D625854200001FC7D1 /* ExampleApp.swift */,
 				4C7856D825854200001FC7D1 /* ContentView.swift */,
-				4C7856E725854218001FC7D1 /* Sources */,
+				4C1C8457258977B600915B24 /* Sources */,
 				4C7856DA25854202001FC7D1 /* Assets.xcassets */,
 				4C7856DF25854202001FC7D1 /* Info.plist */,
 				4C7856E025854202001FC7D1 /* Example.entitlements */,
@@ -116,101 +214,6 @@
 				4C7856DD25854202001FC7D1 /* Preview Assets.xcassets */,
 			);
 			path = "Preview Content";
-			sourceTree = "<group>";
-		};
-		4C7856E725854218001FC7D1 /* Sources */ = {
-			isa = PBXGroup;
-			children = (
-				4C7856E825854218001FC7D1 /* Toucan */,
-			);
-			name = Sources;
-			path = ../../Sources;
-			sourceTree = "<group>";
-		};
-		4C7856E825854218001FC7D1 /* Toucan */ = {
-			isa = PBXGroup;
-			children = (
-				4C7856E925854218001FC7D1 /* Models */,
-				4C7856EE25854218001FC7D1 /* Extensions */,
-				4C7856F425854218001FC7D1 /* Lexers */,
-				4C7856F625854218001FC7D1 /* CodeTheme.swift */,
-				4C7856F725854218001FC7D1 /* TokenType.swift */,
-				4C7856F825854218001FC7D1 /* Generators */,
-				4C7856FB25854218001FC7D1 /* Views */,
-				4C78570125854218001FC7D1 /* RegexLexer.swift */,
-				4C78570225854218001FC7D1 /* Themes */,
-				4C78570425854218001FC7D1 /* SwiftUI */,
-			);
-			path = Toucan;
-			sourceTree = "<group>";
-		};
-		4C7856E925854218001FC7D1 /* Models */ = {
-			isa = PBXGroup;
-			children = (
-				4C7856EA25854218001FC7D1 /* Paragraph.swift */,
-				4C7856EB25854218001FC7D1 /* PlaceholderState.swift */,
-				4C7856EC25854218001FC7D1 /* Theme.swift */,
-				4C7856ED25854218001FC7D1 /* Token.swift */,
-			);
-			path = Models;
-			sourceTree = "<group>";
-		};
-		4C7856EE25854218001FC7D1 /* Extensions */ = {
-			isa = PBXGroup;
-			children = (
-				4C7856EF25854218001FC7D1 /* EditorTextView+Utils.swift */,
-				4C7856F025854218001FC7D1 /* NSTextView+Utils.swift */,
-				4C7856F125854218001FC7D1 /* SyntaxTextView+TextViewDelegate.swift */,
-				4C7856F225854218001FC7D1 /* NSColor+Hex.swift */,
-				4C7856F325854218001FC7D1 /* String+Utils.swift */,
-			);
-			path = Extensions;
-			sourceTree = "<group>";
-		};
-		4C7856F425854218001FC7D1 /* Lexers */ = {
-			isa = PBXGroup;
-			children = (
-				4C7856F525854218001FC7D1 /* SwiftLexer.swift */,
-			);
-			path = Lexers;
-			sourceTree = "<group>";
-		};
-		4C7856F825854218001FC7D1 /* Generators */ = {
-			isa = PBXGroup;
-			children = (
-				4C7856F925854218001FC7D1 /* KeywordTokenGenerator.swift */,
-				4C7856FA25854218001FC7D1 /* RegexTokenGenerator.swift */,
-			);
-			path = Generators;
-			sourceTree = "<group>";
-		};
-		4C7856FB25854218001FC7D1 /* Views */ = {
-			isa = PBXGroup;
-			children = (
-				4C7856FC25854218001FC7D1 /* SyntaxView.swift */,
-				4C7856FD25854218001FC7D1 /* EditorTextView.swift */,
-				4C7856FE25854218001FC7D1 /* TextViewWrapperView.swift */,
-				4C7856FF25854218001FC7D1 /* LineNumberLayoutManager.swift */,
-				4C78570025854218001FC7D1 /* SyntaxTextViewLayoutManager.swift */,
-			);
-			path = Views;
-			sourceTree = "<group>";
-		};
-		4C78570225854218001FC7D1 /* Themes */ = {
-			isa = PBXGroup;
-			children = (
-				4C78570325854218001FC7D1 /* DefaultTheme.swift */,
-				4C7857232585B3AD001FC7D1 /* DefaultThemeDark.swift */,
-			);
-			path = Themes;
-			sourceTree = "<group>";
-		};
-		4C78570425854218001FC7D1 /* SwiftUI */ = {
-			isa = PBXGroup;
-			children = (
-				4C78570525854218001FC7D1 /* SyntaxTextView.swift */,
-			);
-			path = SwiftUI;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -282,31 +285,32 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				4C78570E25854218001FC7D1 /* String+Utils.swift in Sources */,
-				4C78570C25854218001FC7D1 /* SyntaxTextView+TextViewDelegate.swift in Sources */,
-				4C78571525854218001FC7D1 /* EditorTextView.swift in Sources */,
-				4C78571A25854218001FC7D1 /* DefaultTheme.swift in Sources */,
-				4C7857242585B3AD001FC7D1 /* DefaultThemeDark.swift in Sources */,
-				4C78570625854218001FC7D1 /* Paragraph.swift in Sources */,
-				4C78570725854218001FC7D1 /* PlaceholderState.swift in Sources */,
-				4C78571425854218001FC7D1 /* SyntaxView.swift in Sources */,
-				4C78570825854218001FC7D1 /* Theme.swift in Sources */,
-				4C78570925854218001FC7D1 /* Token.swift in Sources */,
+				4C1C848F258977B600915B24 /* SyntaxTextView.swift in Sources */,
+				4C1C8479258977B600915B24 /* SwiftLexer.swift in Sources */,
 				4C7856D925854200001FC7D1 /* ContentView.swift in Sources */,
-				4C78571325854218001FC7D1 /* RegexTokenGenerator.swift in Sources */,
-				4C78571925854218001FC7D1 /* RegexLexer.swift in Sources */,
-				4C78571025854218001FC7D1 /* CodeTheme.swift in Sources */,
-				4C78570D25854218001FC7D1 /* NSColor+Hex.swift in Sources */,
-				4C78571125854218001FC7D1 /* TokenType.swift in Sources */,
-				4C78570F25854218001FC7D1 /* SwiftLexer.swift in Sources */,
-				4C78571725854218001FC7D1 /* LineNumberLayoutManager.swift in Sources */,
-				4C78571225854218001FC7D1 /* KeywordTokenGenerator.swift in Sources */,
-				4C78570A25854218001FC7D1 /* EditorTextView+Utils.swift in Sources */,
-				4C78570B25854218001FC7D1 /* NSTextView+Utils.swift in Sources */,
-				4C78571625854218001FC7D1 /* TextViewWrapperView.swift in Sources */,
+				4C1C8483258977B600915B24 /* CodeTheme.swift in Sources */,
+				4C1C8485258977B600915B24 /* KeywordTokenGenerator.swift in Sources */,
+				4C1C848E258977B600915B24 /* DefaultThemeDark.swift in Sources */,
+				4C1C847F258977B600915B24 /* NSTextView+Utils.swift in Sources */,
+				4C1C8482258977B600915B24 /* String+Utils.swift in Sources */,
+				4C1C847A258977B600915B24 /* Paragraph.swift in Sources */,
+				4C1C8481258977B600915B24 /* NSColor+Hex.swift in Sources */,
+				4C1C8489258977B600915B24 /* TextViewWrapperView.swift in Sources */,
+				4C1C847B258977B600915B24 /* PlaceholderState.swift in Sources */,
+				4C1C8487258977B600915B24 /* SyntaxView.swift in Sources */,
 				4C7856D725854200001FC7D1 /* ExampleApp.swift in Sources */,
-				4C78571B25854218001FC7D1 /* SyntaxTextView.swift in Sources */,
-				4C78571825854218001FC7D1 /* SyntaxTextViewLayoutManager.swift in Sources */,
+				4C1C8484258977B600915B24 /* TokenType.swift in Sources */,
+				4C1C8488258977B600915B24 /* EditorTextView.swift in Sources */,
+				4C1C8486258977B600915B24 /* RegexTokenGenerator.swift in Sources */,
+				4C1C848C258977B600915B24 /* RegexLexer.swift in Sources */,
+				4C1C848A258977B600915B24 /* LineNumberLayoutManager.swift in Sources */,
+				4C1C8480258977B600915B24 /* SyntaxTextView+TextViewDelegate.swift in Sources */,
+				4C1C8478258977B600915B24 /* KotlinLexer.swift in Sources */,
+				4C1C847C258977B600915B24 /* Theme.swift in Sources */,
+				4C1C847D258977B600915B24 /* Token.swift in Sources */,
+				4C1C848D258977B600915B24 /* DefaultThemeLight.swift in Sources */,
+				4C1C848B258977B600915B24 /* SyntaxTextViewLayoutManager.swift in Sources */,
+				4C1C847E258977B600915B24 /* EditorTextView+Utils.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
