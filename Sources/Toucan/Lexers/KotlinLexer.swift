@@ -87,7 +87,7 @@ private extension KotlinLexer {
     /// Regex and generator for keywords.
     /// These keywords are stored in the keywords array.
     var keywordsGenerator: Generator? {
-        keywordGenerator(keywords, tokenType: KotlinTokenType.keyword, excludeWrappedKeywords: true)
+        keywordGenerator(keywords, tokenType: KotlinTokenType.keyword)
     }
 
     /// `Strings`

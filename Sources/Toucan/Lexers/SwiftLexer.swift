@@ -119,7 +119,7 @@ private extension SwiftLexer {
     /// Regex and generator for keywords.
     /// These keywords are stored in the keywords array.
     var keywordsGenerator: Generator? {
-        keywordGenerator(keywords, tokenType: SwiftTokenType.keyword, excludeWrappedKeywords: true)
+        keywordGenerator(keywords, tokenType: SwiftTokenType.keyword)
     }
 
     /// `Keywords`
@@ -152,14 +152,6 @@ private extension SwiftLexer {
     ///     `func, operator, precedencegroup, var, let, or case`
     var otherDeclarationRegexGenerator: Generator? {
         regexGenerator("(?<=\\b(func|operator|precedencegroup|var|let|case)\\s)(\\w+)", tokenType: SwiftTokenType.otherDeclaration)
-    }
-
-    /// `Other Declarations`
-    ///
-    /// Regex and generator declarations wrapped in `.
-    /// These are often times keywords used as variable names.
-    var keywordOtherDeclarationRegexGenerator: Generator? {
-        regexGenerator("(?<=\\`)([\\w\\d]*?)(?=\\`)", tokenType: SwiftTokenType.otherDeclaration)
     }
 
     /// `Project Type Names`
