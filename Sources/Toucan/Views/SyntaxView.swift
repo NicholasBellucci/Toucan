@@ -205,21 +205,19 @@ private extension SyntaxView {
         textStorage.setAttributes(attributes, range: NSRange(location: 0, length: (source as NSString).length))
 
         cachedTokens.forEach {
-            if !$0.token.isPlain {
-                let range = $0.range
+            let range = $0.range
 
-                if $0.token.isPlaceholder {
-                    let startRange = NSRange(location: range.lowerBound, length: 2)
-                    let endRange = NSRange(location: range.upperBound - 2, length: 2)
-                    let contentRange = NSRange(location: range.lowerBound + 2, length: range.length - 4)
+            if $0.token.isPlaceholder {
+                let startRange = NSRange(location: range.lowerBound, length: 2)
+                let endRange = NSRange(location: range.upperBound - 2, length: 2)
+                let contentRange = NSRange(location: range.lowerBound + 2, length: range.length - 4)
 
-                    textStorage.addAttributes(theme.attributes(for: $0.token), range: contentRange)
-                    textStorage.addAttributes([.placeholder: PlaceholderState.inactive], range: range)
-                    textStorage.addAttributes([.foregroundColor: NSColor.clear, .font: NSFont.systemFont(ofSize: 2)], range: startRange)
-                    textStorage.addAttributes([.foregroundColor: NSColor.clear, .font: NSFont.systemFont(ofSize: 1)], range: endRange)
-                } else {
-                    textStorage.addAttributes(theme.attributes(for: $0.token), range: range)
-                }
+                textStorage.addAttributes(theme.attributes(for: $0.token), range: contentRange)
+                textStorage.addAttributes([.placeholder: PlaceholderState.inactive], range: range)
+                textStorage.addAttributes([.foregroundColor: NSColor.clear, .font: NSFont.systemFont(ofSize: 2)], range: startRange)
+                textStorage.addAttributes([.foregroundColor: NSColor.clear, .font: NSFont.systemFont(ofSize: 1)], range: endRange)
+            } else {
+                textStorage.addAttributes(theme.attributes(for: $0.token), range: range)
             }
         }
 

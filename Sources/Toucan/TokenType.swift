@@ -2,7 +2,6 @@ import Foundation
 
 public protocol TokenType {
     var isPlaceholder: Bool { get }
-    var isPlain: Bool { get }
 }
 
 struct SourceCodeToken: Token {
@@ -13,9 +12,5 @@ struct SourceCodeToken: Token {
 extension SourceCodeToken {
     var isPlaceholder: Bool {
         return type.isPlaceholder
-    }
-
-    var isPlain: Bool {
-        return type.isPlain
     }
 }

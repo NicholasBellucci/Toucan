@@ -14,10 +14,6 @@ public class KotlinLexer {
         public var isPlaceholder: Bool {
             self == .placeholder
         }
-
-        public var isPlain: Bool {
-            self == .plain
-        }
     }
 
     public init() { }

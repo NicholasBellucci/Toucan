@@ -68,7 +68,7 @@ private extension DefaultThemeDark {
         case .keyword: return NSColor(0xd37a2c)
         case .string: return NSColor(0x6c905f)
         case .placeholder: return NSColor(0xa5b4c1)
-        case .plain: return NSColor(0xa5b4c1)
+        case .plain: return .yellow
         }
     }
 }
