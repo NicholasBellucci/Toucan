@@ -3,8 +3,8 @@ import SwiftUI
 
 public struct SyntaxTextView: NSViewRepresentable {
     @Binding private var text: String
-    private var lexer: Lexer
     private var theme: EditorTheme
+    private var lexer: Lexer
 
     private var isEditable: Bool = true
     private var allowsUndo: Bool = false
@@ -41,6 +41,8 @@ public struct SyntaxTextView: NSViewRepresentable {
     }
 
     public func updateNSView(_ view: SyntaxView, context: Context) {
+        context.coordinator.wrappedView.theme = theme
+        context.coordinator.wrappedView.lexer = lexer
         context.coordinator.wrappedView.text = text
         view.selectedRanges = context.coordinator.selectedRanges
     }
