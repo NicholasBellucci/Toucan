@@ -42,6 +42,8 @@ public struct SyntaxTextView: NSViewRepresentable {
 
     public func updateNSView(_ view: SyntaxView, context: Context) {
         context.coordinator.wrappedView.text = text
+        context.coordinator.wrappedView.theme = theme
+        context.coordinator.wrappedView.lexer = lexer
         view.selectedRanges = context.coordinator.selectedRanges
     }
 }
