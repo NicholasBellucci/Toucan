@@ -22,23 +22,43 @@ extension RegexLexer {
         generators(source: input).forEach {
             switch $0 {
             case .regex(let generator):
-                tokens.append(contentsOf: regexTokens(from: generator, source: input))
+                tokens.append(
+                    contentsOf: regexTokens(
+                        from: generator,
+                        source: input
+                    )
+                )
 
             case .keywords(let generator):
-                tokens.append(contentsOf: keywordTokens(from: generator, source: input))
+                tokens.append(
+                    contentsOf: keywordTokens(
+                        from: generator,
+                        source: input,
+                        excludeWrappedKeywords: generator.excludeWrappedKeywords
+                    )
+                )
             }
         }
 
         return tokens
     }
 
-    func keywordTokens(from generator: KeywordTokenGenerator, source: String) -> [Token] {
+    func keywordTokens(from generator: KeywordTokenGenerator, source: String, excludeWrappedKeywords: Bool = false) -> [Token] {
         var tokens: [Token] = []
 
         source.enumerateSubstrings(in: source.startIndex..<source.endIndex, options: [.byWords]) { word, range, _, _ in
-            if let word = word, generator.keywords.contains(word) {
-                let token = generator.transformer(range)
-                tokens.append(token)
+            if excludeWrappedKeywords {
+                let predicate = NSPredicate(format:"SELF MATCHES %@", argumentArray: ["(?<=\\`)([\\w\\d]*?)(?=\\`)"])
+
+                if let word = word, generator.keywords.contains(word), predicate.evaluate(with: word) {
+                    let token = generator.transformer(range)
+                    tokens.append(token)
+                }
+            } else {
+                if let word = word, generator.keywords.contains(word) {
+                    let token = generator.transformer(range)
+                    tokens.append(token)
+                }
             }
         }
 
@@ -63,16 +83,17 @@ extension RegexLexer {
 public extension RegexLexer {
     func regexGenerator(_ pattern: String, options: NSRegularExpression.Options = [], tokenType: TokenType) -> Generator? {
         regexGenerator(pattern, options: options) {
-            return SourceCodeToken(type: tokenType, range: $0)
+            SourceCodeToken(type: tokenType, range: $0)
         }
     }
 
-    func keywordGenerator(_ words: [String], tokenType: TokenType) -> Generator {
+    func keywordGenerator(_ words: [String], tokenType: TokenType, excludeWrappedKeywords: Bool = false) -> Generator {
         .keywords(
             KeywordTokenGenerator(
                 keywords: words,
+                excludeWrappedKeywords: excludeWrappedKeywords,
                 transformer: {
-                    return SourceCodeToken(type: tokenType, range: $0)
+                    SourceCodeToken(type: tokenType, range: $0)
                 }
             )
         )
