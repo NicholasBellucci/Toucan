@@ -175,4 +175,9 @@ extension SyntaxView: NSTextViewDelegate {
         selectionDidChange()
         ignoreSelectionChange = false
     }
+
+    public func textDidBeginEditing(_ notification: Notification) {
+        guard let textView = notification.object as? EditorTextView, textView == self.textView else { return }
+        delegate?.textViewDidBeginEditing(textView)
+    }
 }
