@@ -47,8 +47,11 @@ public struct SyntaxTextView: NSViewRepresentable {
     public func updateNSView(_ view: SyntaxView, context: Context) {
         context.coordinator.wrappedView.theme = theme
         context.coordinator.wrappedView.lexer = lexer
-        context.coordinator.wrappedView.text = text
         view.selectedRanges = context.coordinator.selectedRanges
+
+        if context.coordinator.wrappedView.text != text {
+            context.coordinator.wrappedView.text = text
+        }
 
         if isFirstResponder && !context.coordinator.didBecomeFirstResponder  {
             DispatchQueue.main.async {
