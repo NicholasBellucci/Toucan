@@ -1,6 +1,7 @@
 import AppKit
 import Foundation
 import CoreGraphics
+import MetalKit
 
 public protocol SyntaxViewDelegate: class {
     func didChangeSelectedRange(_ syntaxView: SyntaxView, selectedRange: NSRange)
@@ -14,14 +15,14 @@ public extension SyntaxViewDelegate {
     func textViewTextDidChange(_ textView: EditorTextView) { }
 }
 
-public class SyntaxView: NSView {
+public class SyntaxView: MTKView {
     var cachedTokens: [CachedToken]?
     var ignoreSelectionChange = false
     var previousSelectedRange: NSRange?
     var lexer: Lexer?
     var highlighterDelay: Double = 0.0
 
-    public weak var delegate: SyntaxViewDelegate?
+    public weak var syntaxDelegate: SyntaxViewDelegate?
 
     private var textViewSelectedRangeObserver: NSKeyValueObservation?
 
@@ -124,11 +125,11 @@ public class SyntaxView: NSView {
     }()
 
     required init() {
-        super.init(frame: .zero)
+        super.init(frame: .zero, device: nil)
         setupView()
     }
-
-    required init?(coder: NSCoder) {
+    
+    required init(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
 }
