@@ -36,10 +36,7 @@ public struct SyntaxTextView: NSViewRepresentable {
         wrappedView.textView.insertionPointColor = theme.cursorColor
 
         context.coordinator.wrappedView = wrappedView
-
-        DispatchQueue.main.asyncAfter(deadline: .now() + 5) {
-            context.coordinator.wrappedView.text = text
-        }
+        context.coordinator.wrappedView.text = text
 
         return wrappedView
     }
@@ -47,11 +44,8 @@ public struct SyntaxTextView: NSViewRepresentable {
     public func updateNSView(_ view: SyntaxView, context: Context) {
         context.coordinator.wrappedView.theme = theme
         context.coordinator.wrappedView.lexer = lexer
+        context.coordinator.wrappedView.text = text
         view.selectedRanges = context.coordinator.selectedRanges
-
-        if context.coordinator.wrappedView.text != text {
-            context.coordinator.wrappedView.text = text
-        }
 
         if isFirstResponder && !context.coordinator.didBecomeFirstResponder  {
             DispatchQueue.main.async {
