@@ -36,7 +36,10 @@ public struct SyntaxTextView: NSViewRepresentable {
         wrappedView.textView.insertionPointColor = theme.cursorColor
 
         context.coordinator.wrappedView = wrappedView
-        context.coordinator.wrappedView.text = text
+
+        DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
+            context.coordinator.wrappedView.text = text
+        }
 
         return wrappedView
     }
