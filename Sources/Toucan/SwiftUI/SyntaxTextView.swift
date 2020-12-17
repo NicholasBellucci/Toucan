@@ -37,7 +37,7 @@ public struct SyntaxTextView: NSViewRepresentable {
 
         context.coordinator.wrappedView = wrappedView
 
-        DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
+        DispatchQueue.main.asyncAfter(deadline: .now() + 5) {
             context.coordinator.wrappedView.text = text
         }
 
