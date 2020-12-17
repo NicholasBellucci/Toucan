@@ -28,7 +28,7 @@ public struct SyntaxTextView: NSViewRepresentable {
 
     public func makeNSView(context: Context) -> SyntaxView {
         let wrappedView = SyntaxView()
-        wrappedView.syntaxDelegate = context.coordinator
+        wrappedView.delegate = context.coordinator
         wrappedView.theme = theme
         wrappedView.lexer = lexer
         wrappedView.textViewIsEditable = isEditable

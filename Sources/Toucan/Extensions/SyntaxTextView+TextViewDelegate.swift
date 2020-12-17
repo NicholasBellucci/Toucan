@@ -12,7 +12,7 @@ extension SyntaxView {
     func updateSelectedRange(_ range: NSRange) {
         textView.selectedRange = range
         textView.scrollRangeToVisible(range)
-        syntaxDelegate?.didChangeSelectedRange(self, selectedRange: range)
+        delegate?.didChangeSelectedRange(self, selectedRange: range)
     }
 
     func textDidChange() {
@@ -165,7 +165,7 @@ extension SyntaxView: NSTextViewDelegate {
         guard let textView = notification.object as? EditorTextView, textView == self.textView else { return }
 
         textDidChange()
-        syntaxDelegate?.textViewTextDidChange(textView)
+        delegate?.textViewTextDidChange(textView)
     }
 
     public func textViewDidChangeSelection(_ notification: Notification) {
@@ -178,6 +178,6 @@ extension SyntaxView: NSTextViewDelegate {
 
     public func textDidBeginEditing(_ notification: Notification) {
         guard let textView = notification.object as? EditorTextView, textView == self.textView else { return }
-        syntaxDelegate?.textViewDidBeginEditing(textView)
+        delegate?.textViewDidBeginEditing(textView)
     }
 }
