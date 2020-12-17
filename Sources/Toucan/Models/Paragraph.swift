@@ -101,32 +101,18 @@ extension Paragraph {
         }
 
         for paragraph in paragraphs {
-
             guard paragraph.rect.intersects(rect) else {
                 continue
             }
-
+            
             let attr = paragraph.attributedString(for: style)
-
             var drawRect = paragraph.rect
-
             let gutterWidth = textView.gutterWidth
-
             let drawSize = attr.size()
 
             drawRect.origin.x = gutterWidth - drawSize.width - 4
-
-            #if os(macOS)
-    //            drawRect.origin.y += (drawRect.height - drawSize.height) / 2.0
-            #else
-                //            drawRect.origin.y += 22 - drawSize.height
-            #endif
             drawRect.size.width = drawSize.width
             drawRect.size.height = drawSize.height
-
-    //        Color.red.withAlphaComponent(0.4).setFill()
-    //        paragraph.rect.fill()
-
             attr.draw(in: drawRect)
         }
     }
