@@ -9,6 +9,7 @@ public struct SyntaxTextView: NSViewRepresentable {
     private var isEditable: Bool = true
     private var isFirstResponder: Bool = false
     private var allowsUndo: Bool = false
+    private var highlighterDelay: Double = 0.0
     private var textDidBeginEditing: (() -> ())?
     private var textDidChange: ((String) -> ())?
 
@@ -33,6 +34,7 @@ public struct SyntaxTextView: NSViewRepresentable {
         wrappedView.lexer = lexer
         wrappedView.textViewIsEditable = isEditable
         wrappedView.textViewAllowsUndo = allowsUndo
+        wrappedView.highlighterDelay = highlighterDelay
         wrappedView.textView.insertionPointColor = theme.cursorColor
 
         context.coordinator.wrappedView = wrappedView
@@ -96,6 +98,12 @@ public extension SyntaxTextView {
     func allowsUndo(_ value: Bool) -> SyntaxTextView {
         var copy = self
         copy.allowsUndo = value
+        return copy
+    }
+
+    func highlighterDelay(_ value: Double) -> SyntaxTextView {
+        var copy = self
+        copy.highlighterDelay = value
         return copy
     }
 

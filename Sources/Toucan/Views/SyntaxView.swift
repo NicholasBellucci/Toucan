@@ -19,6 +19,7 @@ public class SyntaxView: NSView {
     var ignoreSelectionChange = false
     var previousSelectedRange: NSRange?
     var lexer: Lexer?
+    var highlighterDelay: Double = 0.0
 
     public weak var delegate: SyntaxViewDelegate?
 
@@ -118,6 +119,7 @@ public class SyntaxView: NSView {
         textView.autoresizingMask = [.width, .height]
         textView.isAutomaticQuoteSubstitutionEnabled = false
         textView.textContainer?.containerSize = NSSize(width: self.bounds.width, height: .greatestFiniteMagnitude)
+        textView.isRichText = false
         return textView
     }()
 
@@ -133,22 +135,34 @@ public class SyntaxView: NSView {
 
 extension SyntaxView {
     func applySyntaxHightlighting(with lexer: Lexer) {
-        guard let textStorage = textView.textStorage else { return }
+        guard let theme = self.theme else { return }
 
-        if let cachedTokens = cachedTokens {
-            updateAttributes(for: textStorage, cachedTokens: cachedTokens, source: textView.text)
-        } else {
-            guard let theme = theme else { return }
+        var attributes: [NSAttributedString.Key: Any] = [:]
+        let widthOfSpace = NSAttributedString(string: " ", attributes: [.font: theme.font]).size().width
 
-            let cachedTokens: [CachedToken] = lexer.tokens(from: textView.text).map {
-                let range = textView.text.range(from: $0.range)
-                return CachedToken(token: $0, range: range)
+        let paragraphStyle = NSMutableParagraphStyle()
+        paragraphStyle.paragraphSpacing = 2.0
+        paragraphStyle.defaultTabInterval = widthOfSpace * 4
+        paragraphStyle.tabStops = []
+        attributes[.paragraphStyle] = paragraphStyle
+
+        DispatchQueue.main.asyncAfter(deadline: .now() + highlighterDelay, qos: .default, flags: .noQoS) { [weak self] in
+            guard let self = self else { return }
+            guard let textStorage = self.textView.textStorage else { return }
+
+            if let cachedTokens = self.cachedTokens {
+                self.updateAttributes(for: textStorage, cachedTokens: cachedTokens, source: self.textView.text)
+            } else {
+                let cachedTokens: [CachedToken] = lexer.tokens(from: self.textView.text).map {
+                    let range = self.textView.text.range(from: $0.range)
+                    return CachedToken(token: $0, range: range)
+                }
+
+                self.textView.font = theme.font
+                self.cachedTokens = cachedTokens
+
+                self.createAttributes(theme: theme, textStorage: textStorage, cachedTokens: cachedTokens, source: self.textView.text)
             }
-
-            textView.font = theme.font
-            self.cachedTokens = cachedTokens
-
-            createAttributes(theme: theme, textStorage: textStorage, cachedTokens: cachedTokens, source: textView.text)
         }
     }
 
@@ -190,13 +204,6 @@ private extension SyntaxView {
         textStorage.beginEditing()
 
         var attributes: [NSAttributedString.Key: Any] = [:]
-        let widthOfSpace = NSAttributedString(string: " ", attributes: [.font: theme.font]).size().width
-
-        let paragraphStyle = NSMutableParagraphStyle()
-        paragraphStyle.paragraphSpacing = 2.0
-        paragraphStyle.defaultTabInterval = widthOfSpace * 4
-        paragraphStyle.tabStops = []
-        attributes[.paragraphStyle] = paragraphStyle
 
         theme.globalAttributes.forEach {
             attributes[$0] = $1
