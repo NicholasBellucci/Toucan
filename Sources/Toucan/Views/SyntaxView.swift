@@ -30,7 +30,9 @@ public class SyntaxView: NSView {
             textView.layer?.isOpaque = true
             textView.string = newValue
 
-            textDidChange()
+            if window != nil {
+                textDidChange()
+            }
         }
     }
 
@@ -128,6 +130,10 @@ public class SyntaxView: NSView {
 
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
+    }
+
+    public override func viewDidMoveToWindow() {
+        print("here")
     }
 }
 
