@@ -3,7 +3,7 @@ import SwiftUI
 
 public struct SyntaxTextView: NSViewRepresentable {
     @Binding private var text: String
-    private var theme: EditorTheme
+    @Binding private var theme: Theme
     private var lexer: Lexer
 
     private var isEditable: Bool = true
@@ -14,11 +14,12 @@ public struct SyntaxTextView: NSViewRepresentable {
 
     public init(
         text: Binding<String>,
-        theme: EditorTheme = DefaultThemeLight(),
+        theme: Binding<Theme>,
         lexer: Lexer = SwiftLexer()
     ) {
         _text = text
-        self.theme = theme
+        _theme = theme
+
         self.lexer = lexer
     }
 
@@ -42,10 +43,17 @@ public struct SyntaxTextView: NSViewRepresentable {
     }
 
     public func updateNSView(_ view: SyntaxView, context: Context) {
-        context.coordinator.wrappedView.theme = theme
         context.coordinator.wrappedView.lexer = lexer
-        context.coordinator.wrappedView.text = text
         view.selectedRanges = context.coordinator.selectedRanges
+
+        if context.coordinator.wrappedView.theme != theme {
+            context.coordinator.wrappedView.theme = theme
+            context.coordinator.wrappedView.textDidChange()
+        }
+
+        if context.coordinator.wrappedView.text != text {
+            context.coordinator.wrappedView.text = text
+        }
 
         if isFirstResponder && !context.coordinator.didBecomeFirstResponder  {
             DispatchQueue.main.async {
@@ -98,7 +106,7 @@ public extension SyntaxTextView {
         copy.allowsUndo = value
         return copy
     }
-    
+
     func textDidBeginEditing(_ handler: @escaping (() -> ())) -> SyntaxTextView {
         var copy = self
         copy.textDidBeginEditing = handler

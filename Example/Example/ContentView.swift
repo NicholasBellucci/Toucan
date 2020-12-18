@@ -19,7 +19,7 @@ struct ContentView: View {
 
                 SyntaxTextView(
                     text: $swift1,
-                    theme: DefaultThemeLight()
+                    theme: .constant(DefaultThemeLight())
                 )
                 .cornerRadius(5)
             }
@@ -31,7 +31,7 @@ struct ContentView: View {
 
                 SyntaxTextView(
                     text: $swift2,
-                    theme: DefaultThemeDark()
+                    theme: .constant(DefaultThemeDark())
                 )
                 .cornerRadius(5)
             }

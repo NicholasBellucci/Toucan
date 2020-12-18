@@ -2,34 +2,32 @@ import Cocoa
 import Foundation
 
 // Xcode Theme: Default (Light)
-public struct DefaultThemeLight: EditorTheme {
-    public init() { }
-
-    public var backgroundColor: NSColor {
+public class DefaultThemeLight: Theme {
+    override public var backgroundColor: NSColor {
         .white
     }
 
-    public var cursorColor: NSColor {
+    override public var cursorColor: NSColor {
         .black
     }
 
-    public var font: NSFont {
+    override public var font: NSFont {
         .monospacedSystemFont(ofSize: 13, weight: .medium)
     }
 
-    public var foregroundColor: NSColor {
+    override public var foregroundColor: NSColor {
         .black
     }
 
-    public var gutterStyle: GutterStyle {
+    override public var gutterStyle: GutterStyle {
         GutterStyle(backgroundColor: backgroundColor, minimumWidth: 32)
     }
 
-    public var lineNumbersStyle: LineNumbersStyle {
+    override public var lineNumbersStyle: LineNumbersStyle {
         LineNumbersStyle(font: .monospacedSystemFont(ofSize: 11, weight: .medium), textColor: NSColor(0x5D6C79))
     }
 
-    public func color(for type: TokenType) -> NSColor {
+    override public func color(for type: TokenType) -> NSColor {
         if let type = type as? SwiftLexer.SwiftTokenType {
             return swiftColor(for: type)
         } else if let type = type as? KotlinLexer.KotlinTokenType {

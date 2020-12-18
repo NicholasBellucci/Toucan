@@ -4,7 +4,7 @@ import CoreGraphics
 
 public class EditorTextView: NSTextView {
     var cachedParagraphs: [Paragraph]?
-    var theme: EditorTheme?
+    var theme: Theme?
 
     var gutterWidth: CGFloat {
         get { textContainerInset.width }

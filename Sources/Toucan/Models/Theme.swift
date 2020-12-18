@@ -22,14 +22,47 @@ public struct GutterStyle {
     }
 }
 
-public protocol Theme {
-    var backgroundColor: NSColor { get }
-    var cursorColor: NSColor { get }
-    var font: NSFont { get }
-    var foregroundColor: NSColor { get }
-    var globalAttributes: [NSAttributedString.Key: Any] { get }
-    var gutterStyle: GutterStyle { get }
-    var lineNumbersStyle: LineNumbersStyle { get }
+public class Theme {
+    public init() { }
 
-    func attributes(for token: Token) -> [NSAttributedString.Key: Any]
+    private var id: UUID = UUID()
+    var backgroundColor: NSColor { .white }
+    var cursorColor: NSColor { .black }
+    var font: NSFont { .systemFont(ofSize: 13) }
+    var foregroundColor: NSColor { .black }
+    var gutterStyle: GutterStyle { GutterStyle(backgroundColor: .white, minimumWidth: 20) }
+    var lineNumbersStyle: LineNumbersStyle { LineNumbersStyle(font: .systemFont(ofSize: 13), textColor: .black) }
+
+    func color(for type: TokenType) -> NSColor { .clear }
+}
+
+extension Theme: Equatable {
+    public static func == (lhs: Theme, rhs: Theme) -> Bool {
+        lhs.id == rhs.id
+    }
+}
+
+extension Theme: Hashable {
+    public func hash(into hasher: inout Hasher) {
+        hasher.combine(id)
+    }
+}
+
+internal extension Theme {
+    var globalAttributes: [NSAttributedString.Key: Any] {
+        [
+            .font: font,
+            .foregroundColor: foregroundColor
+        ]
+    }
+
+    func attributes(for token: Token) -> [NSAttributedString.Key: Any] {
+        var attributes: [NSAttributedString.Key: Any] = [:]
+
+        if let token = token as? SourceCodeToken {
+            attributes[.foregroundColor] = color(for: token.type)
+        }
+
+        return attributes
+    }
 }

@@ -36,15 +36,13 @@ public class SyntaxView: NSView {
         }
     }
 
-    public var theme: EditorTheme? {
+    public var theme: Theme? {
         didSet {
             guard let theme = theme else { return }
 
             textView.backgroundColor = theme.backgroundColor
             textView.theme = theme
             textView.font = theme.font
-
-            textDidChange()
         }
     }
 
@@ -131,10 +129,6 @@ public class SyntaxView: NSView {
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
-
-    public override func viewDidMoveToWindow() {
-        print("here")
-    }
 }
 
 extension SyntaxView {
@@ -192,7 +186,7 @@ private extension SyntaxView {
 }
 
 private extension SyntaxView {
-    func createAttributes(theme: EditorTheme, textStorage: NSTextStorage, cachedTokens: [CachedToken], source: String) {
+    func createAttributes(theme: Theme, textStorage: NSTextStorage, cachedTokens: [CachedToken], source: String) {
         textStorage.beginEditing()
 
         var attributes: [NSAttributedString.Key: Any] = [:]
